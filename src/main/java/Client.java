@@ -6,11 +6,12 @@ public class Client {
     private long client_id;
     private String client_name;
     private String phone;
-    private boolean client_is_removed;
+    private boolean is_client_removed;
 
     public Client() {
     }
 
+    @Column(name = "client_name")
     public String getClient_name() {
         return client_name;
     }
@@ -19,6 +20,7 @@ public class Client {
         this.client_name = client_name;
     }
 
+    @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
@@ -27,12 +29,13 @@ public class Client {
         this.phone = phone;
     }
 
-    public boolean isClient_is_removed() {
-        return client_is_removed;
+    @Column(name = "is_client_removed")
+    public boolean isIs_client_removed() {
+        return is_client_removed;
     }
 
-    public void setClient_is_removed(boolean client_is_removed) {
-        this.client_is_removed = client_is_removed;
+    public void setIs_client_removed(boolean is_client_removed) {
+        this.is_client_removed = is_client_removed;
     }
 
     @Id

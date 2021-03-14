@@ -9,10 +9,8 @@ public class ClientManager {
     protected SessionFactory sessionFactory;
 
     protected void setup() {
-        // code to load Hibernate Session factory
-        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure() // configures settings from hibernate.cfg.xml
-                .build();
+        // configures settings from hibernate.cfg.xml
+        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
         try {
             sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         } catch (Exception ex) {
@@ -28,7 +26,6 @@ public class ClientManager {
     }
 
     protected void exit() {
-        // code to close Hibernate Session factory
         sessionFactory.close();
     }
 
@@ -36,7 +33,7 @@ public class ClientManager {
         Client client = new Client();
         client.setClient_name("Блохей Акула Изикеевич");
         client.setPhone("8-800-555-35-35");
-        client.setClient_is_removed(false);
+        client.setIs_client_removed(false);
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -55,7 +52,7 @@ public class ClientManager {
 
         System.out.println("Name: " + book.getClient_name());
         System.out.println("Phone: " + book.getPhone());
-        System.out.println("client_is_removed: " + book.isClient_is_removed());
+        System.out.println("client_is_removed: " + book.isIs_client_removed());
 
         session.close();
     }
@@ -65,7 +62,7 @@ public class ClientManager {
         client.setClient_id(114);
         client.setPhone("+7-999-666-00-00");
         client.setClient_name("Бирюкова Андреана Михаиловна");
-        client.setClient_is_removed(false);
+        client.setIs_client_removed(false);
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -95,8 +92,8 @@ public class ClientManager {
         manager.setup();
         manager.create();
         manager.read();
-        manager.update();
-        manager.delete();
+//        manager.update();
+//        manager.delete();
         manager.exit();
     }
 }

@@ -27,7 +27,7 @@ CREATE TABLE Clients (
   client_id SERIAL,
   client_name text,
   phone text,
-  client_is_removed boolean DEFAULT false,
+  is_client_removed boolean DEFAULT false,
   PRIMARY KEY (client_id)
 );
 
