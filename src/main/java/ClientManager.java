@@ -52,7 +52,7 @@ public class ClientManager {
 
         System.out.println("Name: " + book.getClient_name());
         System.out.println("Phone: " + book.getPhone());
-        System.out.println("client_is_removed: " + book.isIs_client_removed());
+        System.out.println("client_is_removed: " + book.getIs_client_removed());
 
         session.close();
     }

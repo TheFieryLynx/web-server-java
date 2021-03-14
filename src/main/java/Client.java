@@ -30,7 +30,7 @@ public class Client {
     }
 
     @Column(name = "is_client_removed")
-    public boolean isIs_client_removed() {
+    public boolean getIs_client_removed() {
         return is_client_removed;
     }
 
