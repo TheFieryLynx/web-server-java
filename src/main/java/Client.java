@@ -1,7 +1,7 @@
 import javax.persistence.*;
 
 @Entity
-@Table(name = "client")
+@Table(name = "clients")
 public class Client {
     private long client_id;
     private String client_name;

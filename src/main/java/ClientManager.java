@@ -34,8 +34,19 @@ public class ClientManager {
 
     protected void create() {
         // code to save a book
+        Client client = new Client();
+        client.setClient_name("Блохей Акула Изикеевич");
+        client.setPhone("8-800-555-35-35");
+        client.setClient_is_removed(false);
+        client.setClient_id(112); // remove?
+
         Session session = sessionFactory.openSession();
         session.beginTransaction();
+
+        session.save(client);
+
+        session.getTransaction().commit();
+        session.close();
     }
 
     protected void read() {
@@ -54,6 +65,7 @@ public class ClientManager {
         // code to run the program
         ClientManager manager = new ClientManager();
         manager.setup();
+        manager.create();
 
         manager.exit();
     }
