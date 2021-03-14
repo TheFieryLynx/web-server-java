@@ -46,10 +46,3 @@ public class Client {
         this.client_id = client_id;
     }
 }
-//CREATE TABLE Clients (
-//  client_id SERIAL,
-//  client_name text,
-//  phone text,
-//  client_is_removed boolean DEFAULT false,
-//  PRIMARY KEY (client_id)
-//);

@@ -33,12 +33,10 @@ public class ClientManager {
     }
 
     protected void create() {
-        // code to save a book
         Client client = new Client();
         client.setClient_name("Блохей Акула Изикеевич");
         client.setPhone("8-800-555-35-35");
         client.setClient_is_removed(false);
-        client.setClient_id(112); // remove?
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -50,15 +48,45 @@ public class ClientManager {
     }
 
     protected void read() {
-        // code to get a book
+        Session session = sessionFactory.openSession();
+
+        long bookId = 1;
+        Client book = session.get(Client.class, bookId);
+
+        System.out.println("Name: " + book.getClient_name());
+        System.out.println("Phone: " + book.getPhone());
+        System.out.println("client_is_removed: " + book.isClient_is_removed());
+
+        session.close();
     }
 
     protected void update() {
-        // code to modify a book
+        Client client = new Client();
+        client.setClient_id(114);
+        client.setPhone("+7-999-666-00-00");
+        client.setClient_name("Бирюкова Андреана Михаиловна");
+        client.setClient_is_removed(false);
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        session.update(client);
+
+        session.getTransaction().commit();
+        session.close();
     }
 
     protected void delete() {
-        // code to remove a book
+        Client client = new Client();
+        client.setClient_id(114);
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        session.delete(client);
+
+        session.getTransaction().commit();
+        session.close();
     }
 
     public static void main(String[] args) {
@@ -66,7 +94,9 @@ public class ClientManager {
         ClientManager manager = new ClientManager();
         manager.setup();
         manager.create();
-
+        manager.read();
+        manager.update();
+        manager.delete();
         manager.exit();
     }
 }
