@@ -1,9 +1,9 @@
 DROP TABLE IF EXISTS Films, Clients, Orders;
 DROP TYPE IF EXISTS medium_type;
-DROP DATABASE IF EXISTS java_prak;
+DROP DATABASE IF EXISTS web_server_java;
 
-CREATE DATABASE java_prak;
-\connect java_prak
+CREATE DATABASE web_server_java;
+\connect web_server_java
 
 CREATE TYPE medium_type AS ENUM ('cassette', 'disc');
 
