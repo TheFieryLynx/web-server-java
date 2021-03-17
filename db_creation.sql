@@ -5,8 +5,6 @@ DROP DATABASE IF EXISTS web_server_db;
 CREATE DATABASE web_server_db;
 \connect web_server_db
 
-CREATE TYPE medium_type AS ENUM ('cassette', 'disc');
-
 CREATE TABLE Films (
   film_id SERIAL,
   film_name text,
@@ -36,7 +34,7 @@ CREATE TABLE Orders (
   order_id SERIAL,
   client_id integer NOT NULL REFERENCES Clients ON DELETE RESTRICT,
   film_id integer NOT NULL REFERENCES Films ON DELETE RESTRICT,
-  medium medium_type NOT NULL,
+  medium VARCHAR(32) NOT NULL,
   price integer NOT NULL CHECK (price >= 0),
   film_issue_date date NOT NULL,
   film_return_date date,

@@ -1,14 +1,22 @@
+package entities;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "clients")
+@Table(name = "Clients")
 public class Client {
     private long client_id;
     private String client_name;
     private String phone;
     private boolean is_client_removed;
 
-    public Client() {
+    public Client() {}
+
+    public Client(long client_id, String client_name, String phone, boolean is_client_removed) {
+        this.client_id = client_id;
+        this.client_name = client_name;
+        this.phone = phone;
+        this.is_client_removed = is_client_removed;
     }
 
     @Column(name = "client_name")
