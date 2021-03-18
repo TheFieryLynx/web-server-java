@@ -5,6 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.HibernateSessionFactoryUtil;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 public class ClientDAO {
@@ -36,12 +38,13 @@ public class ClientDAO {
         session.close();
     }
 
-//    public Auto findAutoById(int id) {
-//        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Auto.class, id);
-//    }
-
-    public List<Client> findAll() {
-        List<Client> clients = (List<Client>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Client").list();
-        return clients;
+    public List<Client> loadAll() {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Client> criteria = builder.createQuery(Client.class);
+        criteria.from(Client.class);
+        List<Client> data = session.createQuery(criteria).getResultList();
+        session.close();
+        return data;
     }
 }

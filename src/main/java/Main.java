@@ -5,6 +5,8 @@ import services.ClientService;
 import services.FilmService;
 import services.OrderService;
 
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -30,5 +32,10 @@ public class Main {
                                 102,
                                 false);
         film_s.addFilm(film);
+
+        List<Client> clients = client_s.loadAll();
+        for (Client c : clients){
+            System.out.println(c.getClient_name());
+        }
     }
 }
