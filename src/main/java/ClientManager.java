@@ -34,7 +34,7 @@ public class ClientManager {
         Client client = new Client();
         client.setClient_name("Блохей Акула Изикеевич");
         client.setPhone("8-800-555-35-35");
-        client.setIs_client_removed(false);
+        client.setClient_is_removed(false);
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -53,7 +53,7 @@ public class ClientManager {
 
         System.out.println("Name: " + book.getClient_name());
         System.out.println("Phone: " + book.getPhone());
-        System.out.println("client_is_removed: " + book.getIs_client_removed());
+        System.out.println("client_is_removed: " + book.getClient_is_removed());
 
         session.close();
     }
@@ -63,7 +63,7 @@ public class ClientManager {
         client.setClient_id(114);
         client.setPhone("+7-999-666-00-00");
         client.setClient_name("Бирюкова Андреана Михаиловна");
-        client.setIs_client_removed(false);
+        client.setClient_is_removed(false);
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
