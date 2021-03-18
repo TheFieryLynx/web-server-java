@@ -1,9 +1,6 @@
-DROP TABLE IF EXISTS Films, Clients, Orders;
-DROP TYPE IF EXISTS medium_type;
-DROP DATABASE IF EXISTS web_server_db;
+SET ROLE web_server_user;
 
-CREATE DATABASE web_server_db;
-\connect web_server_db
+DROP TABLE IF EXISTS Films, Clients, Orders;
 
 CREATE TABLE Films (
   film_id SERIAL,
@@ -40,5 +37,3 @@ CREATE TABLE Orders (
   film_return_date date,
   PRIMARY KEY (order_id)
 );
-
-
