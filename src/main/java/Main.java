@@ -11,8 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
         ClientService client_s = new ClientService();
-        Client client = new Client(
-                66, "пипа", "66-66", false);
+        Client client = new Client("пипа", "66-66", false);
         client_s.addClient(client);
 
         OrderService order_s = new OrderService();

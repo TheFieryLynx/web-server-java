@@ -10,10 +10,10 @@ public class Client {
     private String phone;
     private boolean client_is_removed;
 
-    public Client() {}
+    public Client() {
+    }
 
-    public Client(long client_id, String client_name, String phone, boolean client_is_removed) {
-        this.client_id = client_id;
+    public Client(String client_name, String phone, boolean client_is_removed) {
         this.client_name = client_name;
         this.phone = phone;
         this.client_is_removed = client_is_removed;
@@ -55,5 +55,16 @@ public class Client {
 
     public void setClient_id(long client_id) {
         this.client_id = client_id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) { return false; }
+        if (obj.getClass() != this.getClass()) { return false; }
+        final Client other = (Client) obj;
+        return (this.client_id == other.client_id) &&
+                (this.client_name.equals(other.client_name)) &&
+                (this.phone.equals(other.phone)) &&
+                (this.client_is_removed == other.client_is_removed);
     }
 }
