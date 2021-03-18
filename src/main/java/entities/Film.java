@@ -15,6 +15,8 @@ public class Film {
     private int disc_available_number;
     private int cassette_price;
     private int disk_price;
+    private boolean film_is_removed;
+
 
     public Film() {}
 
@@ -51,6 +53,7 @@ public class Film {
         this.film_id = film_id;
     }
 
+    @Column(name = "film_name")
     public String getFilm_name() {
         return film_name;
     }
@@ -59,6 +62,7 @@ public class Film {
         this.film_name = film_name;
     }
 
+    @Column(name = "producer")
     public String getProducer() {
         return producer;
     }
@@ -67,6 +71,7 @@ public class Film {
         this.producer = producer;
     }
 
+    @Column(name = "release_year")
     public int getRelease_year() {
         return release_year;
     }
@@ -75,6 +80,7 @@ public class Film {
         this.release_year = release_year;
     }
 
+    @Column(name = "cassette_total_number")
     public int getCassette_total_number() {
         return cassette_total_number;
     }
@@ -83,6 +89,7 @@ public class Film {
         this.cassette_total_number = cassette_total_number;
     }
 
+    @Column(name = "disc_total_number")
     public int getDisc_total_number() {
         return disc_total_number;
     }
@@ -91,6 +98,7 @@ public class Film {
         this.disc_total_number = disc_total_number;
     }
 
+    @Column(name = "cassette_available_number")
     public int getCassette_available_number() {
         return cassette_available_number;
     }
@@ -99,6 +107,7 @@ public class Film {
         this.cassette_available_number = cassette_available_number;
     }
 
+    @Column(name = "disc_available_number")
     public int getDisc_available_number() {
         return disc_available_number;
     }
@@ -107,6 +116,7 @@ public class Film {
         this.disc_available_number = disc_available_number;
     }
 
+    @Column(name = "cassette_price")
     public int getCassette_price() {
         return cassette_price;
     }
@@ -115,6 +125,7 @@ public class Film {
         this.cassette_price = cassette_price;
     }
 
+    @Column(name = "disk_price")
     public int getDisk_price() {
         return disk_price;
     }
@@ -123,6 +134,7 @@ public class Film {
         this.disk_price = disk_price;
     }
 
+    @Column(name = "film_is_removed")
     public boolean isFilm_is_removed() {
         return film_is_removed;
     }
@@ -131,5 +143,20 @@ public class Film {
         this.film_is_removed = film_is_removed;
     }
 
-    private boolean film_is_removed;
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) { return false; }
+        if (obj.getClass() != this.getClass()) { return false; }
+        final Film other = (Film) obj;
+        return (this.film_id == other.film_id) &&
+                (this.film_name.equals(other.film_name)) &&
+                (this.producer.equals(other.producer)) &&
+                (this.cassette_total_number == other.cassette_total_number) &&
+                (this.disc_total_number == other.disc_total_number) &&
+                (this.cassette_available_number == other.cassette_available_number) &&
+                (this.disc_available_number == other.disc_available_number) &&
+                (this.cassette_price == other.cassette_price) &&
+                (this.disk_price == other.disk_price) &&
+                (this.film_is_removed == other.film_is_removed);
+    }
 }

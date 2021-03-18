@@ -30,13 +30,8 @@ public class ClientServiceTest {
     public void testLoadAll() {
         List<Client> clients = client_s.loadAll();
         Assert.assertEquals(clients.size(), TablesTestData.clients.length);
-        for (Client c : clients){
-            System.out.println(c.getClient_name());
-        }
         for (int i =0; i < clients.size(); ++i){
             Assert.assertEquals(clients.get(i), TablesTestData.clients[i]);
         }
-
     }
-
 }

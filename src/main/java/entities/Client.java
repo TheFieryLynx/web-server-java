@@ -10,8 +10,7 @@ public class Client {
     private String phone;
     private boolean client_is_removed;
 
-    public Client() {
-    }
+    public Client() { }
 
     public Client(String client_name, String phone, boolean client_is_removed) {
         this.client_name = client_name;
