@@ -1,6 +1,7 @@
 package services;
 
-import entities.Client;
+import dataAccess.client.Client;
+import dataAccess.client.ClientService;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

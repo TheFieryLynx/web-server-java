@@ -1,6 +1,6 @@
-package DAO;
+package dataAccess;
 
-import entities.EntityWithId;
+import dataAccess.EntityWithId;
 import org.hibernate.Session;
 
 import java.lang.reflect.ParameterizedType;

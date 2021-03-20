@@ -1,4 +1,6 @@
-package entities;
+package dataAccess.client;
+
+import dataAccess.EntityWithId;
 
 import javax.persistence.*;
 

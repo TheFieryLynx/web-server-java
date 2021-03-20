@@ -1,8 +1,8 @@
 package services;
 
-import entities.Client;
-import entities.Film;
-import entities.Order;
+import dataAccess.client.Client;
+import dataAccess.film.Film;
+import dataAccess.order.Order;
 
 public class TablesTestData {
     public static final Client[] clients = {

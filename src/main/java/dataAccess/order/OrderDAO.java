@@ -1,6 +1,6 @@
-package DAO;
+package dataAccess.order;
 
-import entities.Order;
+import dataAccess.GenericDAO_CRUD;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import utils.HibernateSessionFactoryUtil;

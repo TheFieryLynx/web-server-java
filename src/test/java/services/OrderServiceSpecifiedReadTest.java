@@ -1,8 +1,11 @@
 package services;
 
-import entities.Client;
-import entities.Film;
-import entities.Order;
+import dataAccess.client.Client;
+import dataAccess.client.ClientService;
+import dataAccess.film.Film;
+import dataAccess.film.FilmService;
+import dataAccess.order.Order;
+import dataAccess.order.OrderService;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

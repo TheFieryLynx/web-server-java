@@ -1,9 +1,9 @@
 package utils;
 
-import entities.Client;
+import dataAccess.client.Client;
 
-import entities.Film;
-import entities.Order;
+import dataAccess.film.Film;
+import dataAccess.order.Order;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;

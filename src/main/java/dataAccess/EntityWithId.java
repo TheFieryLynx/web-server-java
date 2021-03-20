@@ -1,4 +1,4 @@
-package entities;
+package dataAccess;
 
 public interface EntityWithId {
     long receiveId();

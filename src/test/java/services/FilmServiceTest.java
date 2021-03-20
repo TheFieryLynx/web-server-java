@@ -1,6 +1,7 @@
 package services;
 
-import entities.Film;
+import dataAccess.film.Film;
+import dataAccess.film.FilmService;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

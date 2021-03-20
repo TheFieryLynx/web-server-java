@@ -1,4 +1,6 @@
-package entities;
+package dataAccess.film;
+
+import dataAccess.EntityWithId;
 
 import javax.persistence.*;
 

@@ -1,7 +1,4 @@
-package services;
-
-import DAO.FilmDAO;
-import entities.Film;
+package dataAccess.film;
 
 import java.util.List;
 

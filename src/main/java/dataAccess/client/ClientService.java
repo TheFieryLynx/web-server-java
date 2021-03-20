@@ -1,7 +1,4 @@
-package services;
-
-import DAO.ClientDAO;
-import entities.Client;
+package dataAccess.client;
 
 import java.util.List;
 

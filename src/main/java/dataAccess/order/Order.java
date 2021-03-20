@@ -1,4 +1,6 @@
-package entities;
+package dataAccess.order;
+
+import dataAccess.EntityWithId;
 
 import javax.persistence.*;
 import java.sql.Date;
