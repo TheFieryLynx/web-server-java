@@ -52,7 +52,7 @@ public class GenericDAO_CRUD<T extends EntityWithId> {
         if (findById(entity.receiveId()) == null) { return false; }
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.saveOrUpdate(entity);
+        session.update(entity);
         session.getTransaction().commit();
         session.close();
         return true;
