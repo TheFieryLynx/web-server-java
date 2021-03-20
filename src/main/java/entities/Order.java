@@ -7,7 +7,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "Orders")
 public class Order {
-    private long order_id;
+    private long order_id = -1;
     private long client_id;
     private long film_id;
     private String medium;

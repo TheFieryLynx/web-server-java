@@ -15,7 +15,7 @@ public class OrderServiceTest {
 
     @BeforeClass
     public void setUp() throws IOException, SQLException {
-        PrepareDatabase.initDB();
+        PrepareDatabase.initEmptyDB();
         this.order_s = new OrderService();
         ClientService client_s = new ClientService();
         for (Client client: TablesTestData.clients){

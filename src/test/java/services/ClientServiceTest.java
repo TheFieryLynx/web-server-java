@@ -19,7 +19,7 @@ public class ClientServiceTest {
 
     @BeforeClass
     public void setUp() throws IOException, SQLException {
-        PrepareDatabase.initDB();
+        PrepareDatabase.initEmptyDB();
         this.client_s = new ClientService();
     }
 

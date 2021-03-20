@@ -11,11 +11,11 @@ public class PrepareDatabase {
     private static final String password = "1";
 
     public static void main(String[] args) throws SQLException, IOException {
-        PrepareDatabase.initDB();
+        PrepareDatabase.initEmptyDB();
         PrepareDatabase.fillDB();
     }
 
-    public static void initDB() throws SQLException, IOException {
+    public static void initEmptyDB() throws SQLException, IOException {
         String text = Files.readString(Paths.get(
                 "/home/maria/Desktop/web-server-java/SQLscripts/tables_creation.sql"));
         Connection con = DriverManager.getConnection(

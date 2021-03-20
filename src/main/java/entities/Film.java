@@ -4,8 +4,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Films")
-public class Film {
-    private long film_id;
+public class Film implements EntityWithId {
+    private long film_id = -1;
     private String film_name;
     private String producer;
     private int release_year;
@@ -158,5 +158,10 @@ public class Film {
                 (this.cassette_price == other.cassette_price) &&
                 (this.disk_price == other.disk_price) &&
                 (this.film_is_removed == other.film_is_removed);
+    }
+
+    @Override
+    public long receiveId() {
+        return getFilm_id();
     }
 }
