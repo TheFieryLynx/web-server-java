@@ -30,5 +30,4 @@ public class TablesTestData {
             new Order(2, 3, "disk", 222,
                     java.sql.Date.valueOf("2013-01-01"), java.sql.Date.valueOf("2013-02-01")),
     };
-
 }

@@ -2,46 +2,63 @@ package DAO;
 
 import entities.Client;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import utils.HibernateSessionFactoryUtil;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 public class ClientDAO {
-    public ClientDAO findById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(ClientDAO.class, id);
+    public Client findById(long id) {
+        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Client.class, id);
     }
 
-    public void save(Client client) {
+    public boolean save(Client client) {
+        // session.save() implicitly reassign field "id". This is not expected behavior.
+        // Therefore the method require an uninitialized field "id"
+        if (client.getClient_id() >= 0) { return false; }
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction tx1 = session.beginTransaction();
         session.save(client);
-        tx1.commit();
         session.close();
+        return true;
     }
 
-    public void update(Client client) {
+    public boolean update(Client client) {
+        // So. It is bad logic that I read an object from DB, do not use this object
+        // and after reading I assign new object to DB.
+        // But there is no hibernate's method which check existence of PR in the table.
+        // On other hand I dont want to rewrite all fields of the first got object.
+        if (findById(client.getClient_id()) == null){ return false; }
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction tx1 = session.beginTransaction();
-        session.update(client);
-        tx1.commit();
+        session.beginTransaction();
+        session.saveOrUpdate(client);
+        session.getTransaction().commit();
         session.close();
+        return true;
     }
 
     public void delete(Client client) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction tx1 = session.beginTransaction();
+        session.beginTransaction();
         session.delete(client);
-        tx1.commit();
+        session.getTransaction().commit();
         session.close();
+    }
+
+    public boolean deleteById(long id){
+        boolean result = false;
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Object persistentInstance = session.load(Client.class, id);
+        if (persistentInstance != null) {
+            session.delete(persistentInstance);
+            result = true;
+        }
+        session.close();
+        return result;
     }
 
     public List<Client> loadAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Client> criteria = builder.createQuery(Client.class);
+        CriteriaQuery<Client> criteria = session.getCriteriaBuilder().createQuery(Client.class);
         criteria.from(Client.class);
         List<Client> data = session.createQuery(criteria).getResultList();
         session.close();

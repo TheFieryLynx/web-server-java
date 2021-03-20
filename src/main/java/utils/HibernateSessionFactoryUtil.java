@@ -25,11 +25,11 @@ public class HibernateSessionFactoryUtil {
                 sessionFactory = configuration.buildSessionFactory(builder.build());
 
             } catch (Exception e) {
-                System.out.println("Исключение!" + e);
+                System.out.println("Исключение!" + e);  // todo сделать нормально
             }
         }
         if (sessionFactory == null){
-            System.err.println("WARNING sessionFactory == null");
+            System.err.println("WARNING sessionFactory == null");  // todo сделать нормально
         }
         return sessionFactory;
     }

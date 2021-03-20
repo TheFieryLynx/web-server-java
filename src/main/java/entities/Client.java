@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Clients")
 public class Client {
-    private long client_id;
+    private long client_id = -1;
     private String client_name;
     private String phone;
     private boolean client_is_removed;
