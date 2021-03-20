@@ -3,6 +3,7 @@ package services;
 import DAO.OrderDAO;
 import entities.Order;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,10 @@ public class OrderService {
     public boolean deleteOrderById(long id) { return this.orderDAO.deleteById(id); }
 
     public boolean updateOrder(Order order) { return this.orderDAO.update(order); }
+
+    public boolean returnFilmByOrderId(long id) {
+        return this.orderDAO.returnFilmByOrderId(id);
+    }
 
     public Order findOrderById(long id) { return this.orderDAO.findById(id); }
 

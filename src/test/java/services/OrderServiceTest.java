@@ -14,10 +14,6 @@ import java.util.List;
 
 public class OrderServiceTest {
     private OrderService order_s;
-    private final long nonExistentId = 100;
-    private final long existentId = 1;
-    private final Order orderUpdated = new Order(1, 2, "disk", 50,
-            java.sql.Date.valueOf("2008-11-01"), java.sql.Date.valueOf("2008-12-01"));
 
     @BeforeClass
     public void setUp() throws IOException, SQLException {
@@ -37,6 +33,11 @@ public class OrderServiceTest {
 
     @Test
     public void testOrderServiceBasic() {
+        long nonExistentId = 100;
+        long existentId = 1;
+        Order orderUpdated = new Order(1, 2, "disk", 50,
+                java.sql.Date.valueOf("2008-11-01"), java.sql.Date.valueOf("2008-12-01"));
+
         // fill the table
         for (Order order : TablesTestData.orders) {
             Assert.assertTrue(order_s.addOrder(order));
@@ -59,6 +60,10 @@ public class OrderServiceTest {
 
         // save object with initialized filed "id"
         Assert.assertFalse(order_s.addOrder(orderUpdated));
+
+        // return Film
+        Assert.assertFalse(order_s.returnFilmByOrderId(1));  // this order is already returned
+        Assert.assertTrue(order_s.returnFilmByOrderId(3));
 
         // remove all objects from the table
         for (Order order : orders) {
