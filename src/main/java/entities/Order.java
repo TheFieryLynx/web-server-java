@@ -100,13 +100,31 @@ public class Order implements EntityWithId {
         if (obj == null) { return false; }
         if (obj.getClass() != this.getClass()) { return false; }
         final Order other = (Order) obj;
+
+        // film_return_date may be null if the film is not returned
+        if ((this.film_return_date == null) && (other.film_return_date != null)) { return false; }
+        if ((this.film_return_date != null) && !this.film_return_date.equals(other.film_return_date)) {
+            return false;
+        }
         return (this.order_id == other.order_id) &&
                 (this.client_id == other.client_id) &&
                 (this.film_id == other.film_id) &&
                 (this.medium.equals(other.medium)) &&
                 (this.price == other.price) &&
-                (this.film_issue_date.equals(other.film_issue_date)) &&
-                (this.film_return_date.equals(other.film_return_date));
+                (this.film_issue_date.equals(other.film_issue_date));
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "order_id=" + order_id +
+                ", client_id=" + client_id +
+                ", film_id=" + film_id +
+                ", medium='" + medium + '\'' +
+                ", price=" + price +
+                ", film_issue_date=" + film_issue_date +
+                ", film_return_date=" + film_return_date +
+                '}';
     }
 
     @Override

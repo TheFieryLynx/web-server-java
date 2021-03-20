@@ -25,14 +25,18 @@ public class OrderServiceTest {
         // Orders are related to clients and films.
         // Therefore, it is required to add values to these two tables
         ClientService client_s = new ClientService();
-        for (Client client: TablesTestData.clients) { client_s.addClient(client); }
+        for (Client client : TablesTestData.clients) {
+            client_s.addClient(client);
+        }
         FilmService film_s = new FilmService();
-        for (Film film : TablesTestData.films) { film_s.addFilm(film); }
+        for (Film film : TablesTestData.films) {
+            film_s.addFilm(film);
+        }
         this.order_s = new OrderService();
     }
 
     @Test
-    public void testOrderService() {
+    public void testOrderServiceBasic() {
         // fill the table
         for (Order order : TablesTestData.orders) {
             Assert.assertTrue(order_s.addOrder(order));
@@ -60,5 +64,26 @@ public class OrderServiceTest {
         for (Order order : orders) {
             Assert.assertTrue(order_s.deleteOrderById(order.getOrder_id()));
         }
+    }
+
+    @Test
+    public void testOrderServiceSpecialized() {
+        // clear table
+        List<Order> orders = order_s.loadAll();
+        for (Order order : orders) {
+            order_s.deleteOrderById(order.getOrder_id());
+        }
+        for (Order order : TablesTestData.orders) {
+            order_s.addOrder(order);
+        }
+
+        // check
+        List<Order> ordersInPeriod = order_s.getOrdersOfClientForSpecifiedPeriod(
+                2, java.sql.Date.valueOf("2012-01-01"), java.sql.Date.valueOf("2012-12-31"));
+        Assert.assertEquals(ordersInPeriod.size(), 1);
+        Order expectedOrder = new Order(2, 2, "cassette", 333,
+                java.sql.Date.valueOf("2012-01-01"), java.sql.Date.valueOf("2012-02-01"));
+        expectedOrder.setOrder_id(2);
+        Assert.assertEquals(ordersInPeriod.get(0), expectedOrder);
     }
 }

@@ -3,6 +3,7 @@ package services;
 import DAO.OrderDAO;
 import entities.Order;
 
+import java.util.Date;
 import java.util.List;
 
 public class OrderService {
@@ -14,7 +15,11 @@ public class OrderService {
 
     public boolean updateOrder(Order order) { return this.orderDAO.update(order); }
 
-    public Order findOrderById(long id) {return this.orderDAO.findById(id);}
+    public Order findOrderById(long id) { return this.orderDAO.findById(id); }
 
-    public List<Order> loadAll() {return this.orderDAO.loadAll();}
+    public List<Order> loadAll() { return this.orderDAO.loadAll(); }
+
+    public List<Order> getOrdersOfClientForSpecifiedPeriod(long client_id, Date startDate, Date endDate) {
+        return this.orderDAO.getOrdersOfClientForSpecifiedPeriod(client_id, startDate, endDate);
+    }
 }

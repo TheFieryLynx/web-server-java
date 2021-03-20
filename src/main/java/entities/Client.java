@@ -68,6 +68,16 @@ public class Client implements EntityWithId {
     }
 
     @Override
+    public String toString() {
+        return "Client{" +
+                "client_id=" + client_id +
+                ", client_name='" + client_name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", client_is_removed=" + client_is_removed +
+                '}';
+    }
+
+    @Override
     public long receiveId() {
         return getClient_id();
     }

@@ -161,6 +161,23 @@ public class Film implements EntityWithId {
     }
 
     @Override
+    public String toString() {
+        return "Film{" +
+                "film_id=" + film_id +
+                ", film_name='" + film_name + '\'' +
+                ", producer='" + producer + '\'' +
+                ", release_year=" + release_year +
+                ", cassette_total_number=" + cassette_total_number +
+                ", disc_total_number=" + disc_total_number +
+                ", cassette_available_number=" + cassette_available_number +
+                ", disc_available_number=" + disc_available_number +
+                ", cassette_price=" + cassette_price +
+                ", disk_price=" + disk_price +
+                ", film_is_removed=" + film_is_removed +
+                '}';
+    }
+
+    @Override
     public long receiveId() {
         return getFilm_id();
     }

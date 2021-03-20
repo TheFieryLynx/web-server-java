@@ -27,7 +27,9 @@ public class TablesTestData {
                     java.sql.Date.valueOf("2011-01-01"), java.sql.Date.valueOf("2011-02-01")),
             new Order(2, 2, "cassette", 333,
                     java.sql.Date.valueOf("2012-01-01"), java.sql.Date.valueOf("2012-02-01")),
+            new Order(2, 3, "cassette", 333,
+                    java.sql.Date.valueOf("2013-01-01"), null),
             new Order(2, 3, "disk", 222,
-                    java.sql.Date.valueOf("2013-01-01"), java.sql.Date.valueOf("2013-02-01")),
+                    java.sql.Date.valueOf("2020-11-01"), java.sql.Date.valueOf("2020-12-01")),
     };
 }
