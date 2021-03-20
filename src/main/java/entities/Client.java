@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Clients")
-public class Client {
+public class Client implements EntityWithId {
     private long client_id = -1;
     private String client_name;
     private String phone;
@@ -65,5 +65,10 @@ public class Client {
                 (this.client_name.equals(other.client_name)) &&
                 (this.phone.equals(other.phone)) &&
                 (this.client_is_removed == other.client_is_removed);
+    }
+
+    @Override
+    public long receiveId() {
+        return getClient_id();
     }
 }
