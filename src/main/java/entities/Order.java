@@ -3,10 +3,9 @@ package entities;
 import javax.persistence.*;
 import java.sql.Date;
 
-// todo column names
 @Entity
 @Table(name = "Orders")
-public class Order {
+public class Order implements EntityWithId {
     private long order_id = -1;
     private long client_id;
     private long film_id;
@@ -106,7 +105,12 @@ public class Order {
                 (this.film_id == other.film_id) &&
                 (this.medium.equals(other.medium)) &&
                 (this.price == other.price) &&
-                (this.film_issue_date == other.film_issue_date) &&
-                (this.film_return_date == other.film_return_date);
+                (this.film_issue_date.equals(other.film_issue_date)) &&
+                (this.film_return_date.equals(other.film_return_date));
+    }
+
+    @Override
+    public long receiveId() {
+        return getOrder_id();
     }
 }

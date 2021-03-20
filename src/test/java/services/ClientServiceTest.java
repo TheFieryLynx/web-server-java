@@ -26,7 +26,7 @@ public class ClientServiceTest {
     @Test
     public void testClientService() {
         // fill the table
-        for (Client client: TablesTestData.clients){
+        for (Client client: TablesTestData.clients) {
             Assert.assertTrue(client_s.addClient(client));
         }
 

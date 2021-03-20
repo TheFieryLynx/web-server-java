@@ -2,6 +2,7 @@ package DAO;
 
 import entities.EntityWithId;
 import org.hibernate.Session;
+
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class GenericDAO_CRUD<T extends EntityWithId> {
     @SuppressWarnings("unchecked")  // turn off warning of unchecked cast
     public GenericDAO_CRUD() {
         this.persistentClass =
-                (Class<T>)((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+                (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
     public T findById(long id) {
@@ -48,7 +49,7 @@ public class GenericDAO_CRUD<T extends EntityWithId> {
         // and after reading I assign new object to DB.
         // But there is no hibernate's method which check existence of PR in the table.
         // On other hand I dont want to rewrite all fields of the first got object.
-        if (findById(entity.receiveId()) == null){ return false; }
+        if (findById(entity.receiveId()) == null) { return false; }
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.saveOrUpdate(entity);
@@ -65,7 +66,7 @@ public class GenericDAO_CRUD<T extends EntityWithId> {
         session.close();
     }
 
-    public boolean deleteById(long id){
+    public boolean deleteById(long id) {
         boolean result = false;
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Object persistentInstance = session.load(persistentClass, id);
