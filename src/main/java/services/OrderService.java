@@ -22,4 +22,8 @@ public class OrderService {
     public List<Order> getOrdersOfClientForSpecifiedPeriod(long client_id, Date startDate, Date endDate) {
         return this.orderDAO.getOrdersOfClientForSpecifiedPeriod(client_id, startDate, endDate);
     }
+
+    public List<Order> getOrdersOfClientNotReturned(long client_id) {
+        return this.orderDAO.getOrdersOfClientNotReturned(client_id);
+    }
 }

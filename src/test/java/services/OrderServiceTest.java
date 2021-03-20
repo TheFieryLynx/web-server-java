@@ -65,25 +65,4 @@ public class OrderServiceTest {
             Assert.assertTrue(order_s.deleteOrderById(order.getOrder_id()));
         }
     }
-
-    @Test
-    public void testOrderServiceSpecialized() {
-        // clear table
-        List<Order> orders = order_s.loadAll();
-        for (Order order : orders) {
-            order_s.deleteOrderById(order.getOrder_id());
-        }
-        for (Order order : TablesTestData.orders) {
-            order_s.addOrder(order);
-        }
-
-        // check
-        List<Order> ordersInPeriod = order_s.getOrdersOfClientForSpecifiedPeriod(
-                2, java.sql.Date.valueOf("2012-01-01"), java.sql.Date.valueOf("2012-12-31"));
-        Assert.assertEquals(ordersInPeriod.size(), 1);
-        Order expectedOrder = new Order(2, 2, "cassette", 333,
-                java.sql.Date.valueOf("2012-01-01"), java.sql.Date.valueOf("2012-02-01"));
-        expectedOrder.setOrder_id(2);
-        Assert.assertEquals(ordersInPeriod.get(0), expectedOrder);
-    }
 }

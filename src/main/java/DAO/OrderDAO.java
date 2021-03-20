@@ -27,7 +27,7 @@ public class OrderDAO extends GenericDAO_CRUD<Order> {
     public List<Order> getOrdersOfClientNotReturned(long client_id) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query<Order> q = session.createQuery(
-                "from Order where client_id = :clientId and film_issue_date is NULL", Order.class)
+                "from Order where client_id = :clientId and film_return_date is null", Order.class)
                 .setParameter("clientId", client_id);
         q.getResultList();
         List<Order> orders = q.list();
