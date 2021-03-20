@@ -6,7 +6,7 @@ import entities.Order;
 
 public class TablesTestData {
     public static final Client[] clients = {
-            new Client("Лупа", "33-33", false),
+            new Client("Лупа", "99-99", false),
             new Client("Пупа", "66-66", false)
     };
 
