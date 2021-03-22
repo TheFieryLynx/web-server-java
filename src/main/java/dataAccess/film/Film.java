@@ -183,4 +183,17 @@ public class Film implements EntityWithId {
     public long receiveId() {
         return getFilm_id();
     }
+
+    public boolean checkCorrectness(){
+        return ((this.cassette_total_number >= 0) &&
+                (this.disc_total_number >= 0) &&
+                (this.cassette_price >= 0) &&
+                (this.disk_price >= 0)) &&
+
+                (0 <= this.cassette_available_number) &&
+                (this.cassette_available_number <= this.cassette_total_number)&&
+
+                (0 <= this.disc_available_number) &&
+                (this.disc_available_number <= this.disc_total_number);
+    }
 }

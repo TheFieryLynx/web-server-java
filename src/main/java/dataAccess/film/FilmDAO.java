@@ -1,5 +1,14 @@
 package dataAccess.film;
 
-import dataAccess.GenericDAO_CRUD;
+import dataAccess.film.Film;
 
-public class FilmDAO extends GenericDAO_CRUD<Film> {}
+import java.util.List;
+
+public interface FilmDAO {
+
+    boolean save(Film film);
+    boolean deleteById(long id);
+    boolean update(Film film);
+    Film findById(long id);
+    List<Film> loadAll();    
+}
