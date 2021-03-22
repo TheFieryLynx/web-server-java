@@ -3,7 +3,7 @@ package dataAccess.client;
 import java.util.List;
 
 public class ClientService {
-    private final ClientDAO clientDAO = new ClientDAO();
+    private final ClientDAO clientDAO = new ClientDAOImpl();
 
     public boolean addClient(Client client) {
         return this.clientDAO.save(client);
