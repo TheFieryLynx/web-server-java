@@ -15,21 +15,16 @@ public class HibernateSessionFactoryUtil {
 
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
-            try {
-                Configuration configuration = new Configuration().configure();
-                configuration.addAnnotatedClass(Client.class);
-                configuration.addAnnotatedClass(Order.class);
-                configuration.addAnnotatedClass(Film.class);
-                StandardServiceRegistryBuilder builder =
-                        new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-                sessionFactory = configuration.buildSessionFactory(builder.build());
-
-            } catch (Exception e) {
-                System.out.println("Исключение!" + e);  // todo сделать нормально
-            }
+            Configuration configuration = new Configuration().configure();
+            configuration.addAnnotatedClass(Client.class);
+            configuration.addAnnotatedClass(Order.class);
+            configuration.addAnnotatedClass(Film.class);
+            StandardServiceRegistryBuilder builder =
+                    new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+            sessionFactory = configuration.buildSessionFactory(builder.build());
         }
         if (sessionFactory == null){
-            System.err.println("WARNING sessionFactory == null");  // todo сделать нормально
+            throw new RuntimeException("sessionFactory did not initialized");
         }
         return sessionFactory;
     }
