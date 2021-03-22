@@ -137,4 +137,9 @@ public class Order implements EntityWithId {
     public long receiveId() {
         return getOrder_id();
     }
+
+    public boolean checkCorrectness(){
+        return (medium.equals("disk") || medium.equals("cassette") &&
+                (this.film_issue_date != null));
+    }
 }

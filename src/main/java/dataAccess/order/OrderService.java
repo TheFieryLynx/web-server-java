@@ -4,13 +4,19 @@ import java.util.Date;
 import java.util.List;
 
 public class OrderService {
-    private final OrderDAO orderDAO = new OrderDAO();
+    private final OrderDAO orderDAO = new OrderDAOImpl();
 
-    public boolean addOrder(Order order) { return this.orderDAO.save(order);}
+    public boolean addOrder(Order order) {
+        if (order.checkCorrectness()) { return this.orderDAO.save(order); }
+        return false;
+    }
 
     public boolean deleteOrderById(long id) { return this.orderDAO.deleteById(id); }
 
-    public boolean updateOrder(Order order) { return this.orderDAO.update(order); }
+    public boolean updateOrder(Order order) {
+        if (order.checkCorrectness()) { return this.orderDAO.update(order); }
+        return false;
+    }
 
     public boolean returnFilmByOrderId(long id) {
         return this.orderDAO.returnFilmByOrderId(id);
