@@ -151,8 +151,8 @@ public class Film implements EntityWithId {
         if (obj.getClass() != this.getClass()) { return false; }
         final Film other = (Film) obj;
         return (this.film_id == other.film_id) &&
-                (this.film_name.equals(other.film_name)) &&
-                (this.producer.equals(other.producer)) &&
+                this.film_name.equals(other.film_name) &&
+                this.producer.equals(other.producer) &&
                 (this.cassette_total_number == other.cassette_total_number) &&
                 (this.disc_total_number == other.disc_total_number) &&
                 (this.cassette_available_number == other.cassette_available_number) &&

@@ -64,8 +64,8 @@ public class Client implements EntityWithId {
         if (obj.getClass() != this.getClass()) { return false; }
         final Client other = (Client) obj;
         return (this.client_id == other.client_id) &&
-                (this.client_name.equals(other.client_name)) &&
-                (this.phone.equals(other.phone)) &&
+                this.client_name.equals(other.client_name) &&
+                this.phone.equals(other.phone) &&
                 (this.client_is_removed == other.client_is_removed);
     }
 

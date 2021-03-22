@@ -1,6 +1,8 @@
 package dataAccess.order;
 
 import dataAccess.EntityWithId;
+import dataAccess.client.Client;
+import dataAccess.film.Film;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -9,8 +11,8 @@ import java.sql.Date;
 @Table(name = "Orders")
 public class Order implements EntityWithId {
     private long order_id = -1;
-    private long client_id;
-    private long film_id;
+    private Client client;
+    private Film film;
     private String medium;
     private int price;
     private java.sql.Date film_issue_date;
@@ -18,14 +20,14 @@ public class Order implements EntityWithId {
 
     public Order() {}
 
-    public Order(long client_id,
-                 long film_id,
+    public Order(Client client_id,
+                 Film film_id,
                  String medium,
                  int price,
                  Date film_issue_date,
                  Date film_return_date) {
-        this.client_id = client_id;
-        this.film_id = film_id;
+        this.client = client_id;
+        this.film = film_id;
         this.medium = medium;
         this.price = price;
         this.film_issue_date = film_issue_date;
@@ -43,22 +45,24 @@ public class Order implements EntityWithId {
         this.order_id = order_id;
     }
 
-    @Column(name = "client_id")
-    public long getClient_id() {
-        return client_id;
+    @ManyToOne(targetEntity = Client.class)
+    @JoinColumn(name = "client_id")
+    public Client getClient() {
+        return client;
     }
 
-    public void setClient_id(long client_id) {
-        this.client_id = client_id;
+    public void setClient(Client client_id) {
+        this.client = client_id;
     }
 
-    @Column(name = "film_id")
-    public long getFilm_id() {
-        return film_id;
+    @ManyToOne(targetEntity = Film.class)
+    @JoinColumn(name = "film_id")
+    public Film getFilm() {
+        return film;
     }
 
-    public void setFilm_id(long film_id) {
-        this.film_id = film_id;
+    public void setFilm(Film film_id) {
+        this.film = film_id;
     }
 
     @Column(name = "medium")
@@ -109,19 +113,19 @@ public class Order implements EntityWithId {
             return false;
         }
         return (this.order_id == other.order_id) &&
-                (this.client_id == other.client_id) &&
-                (this.film_id == other.film_id) &&
-                (this.medium.equals(other.medium)) &&
+                this.client.equals(other.client) &&
+                this.film.equals(other.film) &&
+                this.medium.equals(other.medium) &&
                 (this.price == other.price) &&
-                (this.film_issue_date.equals(other.film_issue_date));
+                this.film_issue_date.equals(other.film_issue_date);
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "order_id=" + order_id +
-                ", client_id=" + client_id +
-                ", film_id=" + film_id +
+                ", client_id=" + client +
+                ", film_id=" + film +
                 ", medium='" + medium + '\'' +
                 ", price=" + price +
                 ", film_issue_date=" + film_issue_date +

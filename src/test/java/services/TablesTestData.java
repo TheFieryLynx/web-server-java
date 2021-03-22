@@ -23,13 +23,13 @@ public class TablesTestData {
     };
 
     public static final Order[] orders = {
-            new Order(2, 1, "cassette", 333,
+            new Order(TablesTestData.clients[1], TablesTestData.films[0], "cassette", 333,
                     java.sql.Date.valueOf("2011-01-01"), java.sql.Date.valueOf("2011-02-01")),
-            new Order(2, 2, "cassette", 333,
+            new Order(TablesTestData.clients[1], TablesTestData.films[1], "cassette", 333,
                     java.sql.Date.valueOf("2012-01-01"), java.sql.Date.valueOf("2012-02-01")),
-            new Order(2, 3, "cassette", 333,
+            new Order(TablesTestData.clients[1], TablesTestData.films[2], "cassette", 333,
                     java.sql.Date.valueOf("2013-01-01"), null),
-            new Order(2, 1, "disk", 222,
+            new Order(TablesTestData.clients[1], TablesTestData.films[1], "disk", 222,
                     java.sql.Date.valueOf("2020-11-01"), java.sql.Date.valueOf("2020-12-01")),
     };
 }

@@ -1,6 +1,5 @@
 package dataAccess;
 
-import dataAccess.EntityWithId;
 import org.hibernate.Session;
 
 import java.lang.reflect.ParameterizedType;

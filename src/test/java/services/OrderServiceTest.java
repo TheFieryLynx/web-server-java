@@ -38,7 +38,7 @@ public class OrderServiceTest {
     public void testOrderServiceBasic() {
         long nonExistentId = 100;
         long existentId = 1;
-        Order orderUpdated = new Order(1, 2, "disk", 50,
+        Order orderUpdated = new Order(TablesTestData.clients[0], TablesTestData.films[1], "disk", 50,
                 java.sql.Date.valueOf("2008-11-01"), java.sql.Date.valueOf("2008-12-01"));
 
         // fill the table

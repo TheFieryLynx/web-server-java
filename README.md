@@ -26,7 +26,7 @@ $ java -cp ./target/web-server-java-1.0-SNAPSHOT.jar Main
 
 Схема базы данных:
 
-![Alt text](./Images/bd.png)
+![Alt text](Images/db.png)
 
 ## Сценарии использования приложения:
 - Получение списка клиентов: `Главная страница` -> `Список клиентов`.
