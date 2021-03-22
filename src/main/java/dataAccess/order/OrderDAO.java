@@ -13,6 +13,8 @@ import java.util.List;
 public class OrderDAO extends GenericDAO_CRUD<Order> {
 
     public boolean returnFilmByOrderId(long id) {
+        // may be it was right to write this method only in service
+        // but here I can call methods which make this function faster
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Order returningOrder = session.get(Order.class, id);
         if ((returningOrder == null) || (returningOrder.getFilm_return_date() != null)) {
@@ -29,11 +31,27 @@ public class OrderDAO extends GenericDAO_CRUD<Order> {
     }
 
     public List<Order> getOrdersOfClientForSpecifiedPeriod(long client_id, Date startDate, Date endDate) {
-        // todo check data not nul
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query<Order> q = session.createQuery("from Order where client.client_id = :clientId and " +
-                ":sDate <= film_issue_date and film_issue_date <= :eDate", Order.class)
+        Query<Order> q = session.createQuery("select ord from Order ord " +
+                "where ord.client.client_id = :clientId and " +
+                ":sDate <= ord.film_issue_date and " +
+                "ord.film_issue_date <= :eDate", Order.class)
                 .setParameter("clientId", client_id)
+                .setParameter("sDate", startDate, TemporalType.DATE)
+                .setParameter("eDate", endDate, TemporalType.DATE);
+        q.getResultList();
+        List<Order> orders = q.list();
+        session.close();
+        return orders;
+    }
+
+    public List<Order> getOrdersOfFilmForSpecifiedPeriod(long film_id, Date startDate, Date endDate) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query<Order> q = session.createQuery("select ord from Order ord " +
+                "where ord.film.film_id = :filmId and " +
+                ":sDate <= ord.film_issue_date and " +
+                "ord.film_issue_date <= :eDate", Order.class)
+                .setParameter("filmId", film_id)
                 .setParameter("sDate", startDate, TemporalType.DATE)
                 .setParameter("eDate", endDate, TemporalType.DATE);
         q.getResultList();
@@ -44,8 +62,8 @@ public class OrderDAO extends GenericDAO_CRUD<Order> {
 
     public List<Order> getOrdersOfClientNotReturned(long client_id) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query<Order> q = session.createQuery(
-                "from Order where client.client_id = :clientId and film_return_date is null", Order.class)
+        Query<Order> q = session.createQuery("select ord from Order ord " +
+                "where ord.client.client_id = :clientId and ord.film_return_date is null", Order.class)
                 .setParameter("clientId", client_id);
         q.getResultList();
         List<Order> orders = q.list();
