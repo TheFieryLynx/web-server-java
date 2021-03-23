@@ -1,7 +1,17 @@
 # web-server-java (Видеопрокат)
 
-Abstraction layers:
+Architecture:
 
+The database of this application consist of 3 tables. There are POJO class, DAOInterface, DAOImplementation, service class for every table.
+
+* **POJO** - Plain Old Java Object - class, whose fields corresponding to columns of the table and there is a getter and a setter fore all columns. 
+It is needed for storage objects of a table.
+* **DAOInterface** - interface, that describes calling needed for the application. 
+For example, such interfaces help to relatively painlessly change database (Postgre to lightSQL or something another, may be noSQL)
+* **DAOImplementation** - class, that implements communication with the database.
+* **Service** - class, that implements business logic and call DAO methods.
+
+There is `GenericDAO_CRUD class` that has templates for main create, read, update, delete methods of DAO classes.
 
 Предполагается, что приложение используется сотрудником видеопроката, поэтому у него есть доступ ко всей информации в базе данных и возможность выполнять все поддерживаемые операции.  
 Схема навигации между страницами:

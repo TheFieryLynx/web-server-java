@@ -80,7 +80,7 @@ public class Client implements EntityWithId {
     }
 
     @Override
-    public long receiveId() {
+    public long receivePrimaryKey() {
         return getClient_id();
     }
 }

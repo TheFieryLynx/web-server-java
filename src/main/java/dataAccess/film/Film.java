@@ -180,7 +180,7 @@ public class Film implements EntityWithId {
     }
 
     @Override
-    public long receiveId() {
+    public long receivePrimaryKey() {
         return getFilm_id();
     }
 

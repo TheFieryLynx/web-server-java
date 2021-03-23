@@ -134,7 +134,7 @@ public class Order implements EntityWithId {
     }
 
     @Override
-    public long receiveId() {
+    public long receivePrimaryKey() {
         return getOrder_id();
     }
 

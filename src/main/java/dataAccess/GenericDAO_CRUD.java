@@ -36,7 +36,7 @@ public class GenericDAO_CRUD<T extends EntityWithId> {
     public boolean save(T entity) {
         // session.save() implicitly reassign field "id". This is not expected behavior.
         // Therefore the method require an uninitialized field "id"
-        if (entity.receiveId() >= 0) { return false; }
+        if (entity.receivePrimaryKey() >= 0) { return false; }
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.save(entity);
         session.close();
@@ -48,7 +48,7 @@ public class GenericDAO_CRUD<T extends EntityWithId> {
         // and after reading I assign new object to DB.
         // But there is no hibernate's method which check existence of PR in the table.
         // On other hand I dont want to rewrite all fields of the first got object.
-        if (findById(entity.receiveId()) == null) { return false; }
+        if (findById(entity.receivePrimaryKey()) == null) { return false; }
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.update(entity);

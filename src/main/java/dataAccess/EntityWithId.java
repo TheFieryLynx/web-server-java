@@ -1,5 +1,5 @@
 package dataAccess;
 
 public interface EntityWithId {
-    long receiveId();
+    long receivePrimaryKey();
 }
