@@ -1,6 +1,6 @@
 # web-server-java (Видеопрокат)
 
-Architecture:
+## Architecture:
 
 The database of this application consist of 3 tables. There are POJO class, DAOInterface, DAOImplementation, service class for every table.
 
@@ -12,6 +12,10 @@ For example, such interfaces help to relatively painlessly change database (Post
 * **Service** - class, that implements business logic and call DAO methods.
 
 There is `GenericDAO_CRUD class` that has templates for main create, read, update, delete methods of DAO classes.
+
+## Tests
+**services tests**: I think it is wrong to test interaction of the application with the database by using unit tests. But it was the simplest solution.
+
 
 Предполагается, что приложение используется сотрудником видеопроката, поэтому у него есть доступ ко всей информации в базе данных и возможность выполнять все поддерживаемые операции.  
 Схема навигации между страницами:
