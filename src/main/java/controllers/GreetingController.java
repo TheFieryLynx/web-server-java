@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class GreetingController {
     FilmService filmService = new FilmService();
@@ -19,6 +21,13 @@ public class GreetingController {
 //        model.addAttribute("name", name);
 //        return "greeting";
 //    }
+
+    @GetMapping("/filmsList")
+    public String filmsListPage(Model model) {
+        List<Film> films = filmService.loadAll();  // todo sort & load not all films
+        model.addAttribute("films", films);
+        return "filmsList";
+    }
 
     @GetMapping("/film")
     public String filmPage(@RequestParam(name="id", required=true) String filmId, Model model) {

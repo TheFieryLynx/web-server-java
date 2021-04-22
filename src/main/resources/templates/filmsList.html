@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home page</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th> Link </th>
+        <th> Title </th>
+        <th> Author </th>
+        <th> Producer </th>
+        <th> Release year </th>
+        <th> Cassette price </th>
+        <th> Disk price </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${films.empty}">
+        <td colspan="6"> No films here </td>
+    </tr>
+    <tr th:each="film : ${films}">
+        <td><a th:href="'/film?id=' + ${film.getFilm_id()}"> Film</a> Link </td>
+        <td><span th:text="${film.getFilm_name()}"> Title </span></td>
+        <td><span th:text="${film.getProducer()}"> Producer </span></td>
+        <td><span th:text="${film.getRelease_year()}"> Release year </span></td>
+        <td><span th:text="${film.getCassette_price()}"> Cassette price </span></td>
+        <td><span th:text="${film.getDisk_price()}"> Disk price </span></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
