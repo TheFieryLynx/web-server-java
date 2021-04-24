@@ -7,6 +7,7 @@ import dataAccess.film.FilmService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -35,6 +36,16 @@ public class GreetingController {
         Film film = filmService.findFilmById(Long.parseLong(filmId));
         model.addAttribute("filmName", film.getFilm_name());
         return "film";
+    }
+
+    @PostMapping("/saveFilm")
+    public String saveFilmPage(Model model) {
+        return "index";  // todo
+    }
+
+    @GetMapping("/addFilm")
+    public String addFilmPage(Model model) {
+        return "addFilm";
     }
 
     @GetMapping("/client")
