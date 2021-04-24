@@ -1,16 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>addFilm</title>
+    <title>add film</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 
 <form action="/saveFilm" method="post">
-    <label for="fname">First name:</label>
-    <input type="text" id="fname" name="fname"><br><br>
-    <label for="lname">Last name:</label>
-    <input type="text" id="lname" name="lname"><br><br>
+    <input type="hidden" name="id" th:value="${film_id}" />
+
+    <label for="film_name">Film name:</label>
+    <input type="text" id="film_name" name="film_name" th:value="${film_name}"><br><br>
+
+    <label for="producer">Producer:</label>
+    <input type="text" id="producer" name="producer" th:value="${producer}"><br><br>
+
+    <label for="release_year">Release year:</label>
+    <input type="number" id="release_year" name="release_year" th:value="${release_year}"><br><br>
+
+    <label for="cassette_total_number">Cassette total number:</label>
+    <input type="number" id="cassette_total_number" name="cassette_total_number" th:value="${cassette_total_number}"><br><br>
+
+    <label for="disc_total_number">Disc total number</label>
+    <input type="number" id="disc_total_number" name="disc_total_number" th:value="${disc_total_number}"><br><br>
+
+    <label for="cassette_price">Cassette price:</label>
+    <input type="number" id="cassette_price" name="cassette_price" th:value="${cassette_price}"><br><br>
+
+    <label for="disk_price">Disk price:</label>
+    <input type="number" id="disk_price" name="disk_price" th:value="${disk_price}"><br><br>
+
     <input type="submit" value="Submit">
 </form>
 

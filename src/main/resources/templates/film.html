@@ -2,18 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<p th:text="'Film id is ' + ${filmId}"></p>
-<p th:text="'Film name is ' + ${filmName}"></p>
+<p th:text="'Film id: ' + ${filmId}"></p>
+<p th:text="'Film name: ' + ${filmName}"></p>
+<p th:text="'Producer: ' + ${producer}"></p>
+<p th:text="'Release year: ' + ${release_year}"></p>
+<p th:text="'Cassette total number: ' + ${cassette_total_number}"></p>
+<p th:text="'Disc total number: ' + ${disc_total_number}"></p>
+<p th:text="'Cassette available number: ' + ${cassette_available_number}"></p>
+<p th:text="'Disc available number: ' + ${disc_available_number}"></p>
+<p th:text="'Cassette price: ' + ${cassette_price}"></p>
+<p th:text="'Disk price: ' + ${disk_price}"></p>
+<p th:text="'Film is removed: ' + ${film_is_removed}"></p>
 
-<form action="/action_page.php">
-    <label for="fname">First name:</label>
-    <input type="text" id="fname" name="fname"><br><br>
-    <label for="lname">Last name:</label>
-    <input type="text" id="lname" name="lname"><br><br>
-    <input type="submit" value="Submit">
+<form method="get" action="/addFilm">
+    <input type="hidden" name="id" th:value="${filmId}" />
+    <button type="submit">Edit</button>
 </form>
 
 </body>
