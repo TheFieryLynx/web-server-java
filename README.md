@@ -1,5 +1,11 @@
 # web-server-java (Видеопрокат)
 
+## how to run
+
+* build jar (maybe using intellij IDEA)
+* run jar on specified address and port  
+`$ java -jar -Dserver.addres=localhost -Dserver.port=8080 ./out/artifacts/web_server_java_jar/web-server-java.jar`
+  
 ## Architecture:
 
 The database of this application consist of 3 tables. There are POJO class, DAOInterface, DAOImplementation, service class for every table.
