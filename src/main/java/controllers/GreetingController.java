@@ -19,7 +19,7 @@ public class GreetingController {
 
     @GetMapping("/filmsList")
     public String filmsListPage(Model model) {
-        List<Film> films = filmService.loadAll();  // todo sort & load not all films
+        List<Film> films = filmService.loadAllActualSorted();  // todo load not all films
         model.addAttribute("films", films);
         return "filmsList";
     }
@@ -81,6 +81,13 @@ public class GreetingController {
             return String.format("redirect:/film?id=%d", film.getFilm_id());
         }
         return "filmsList";  // todo show error
+    }
+
+    @GetMapping("/deleteFilm")
+    public String deleteFilmPage(@RequestParam(name = "id", required = true) Integer filmId, Model model){
+        boolean result = filmService.safetyDeleteFilmById(filmId);
+        if (!result){ return String.format("redirect:/film?id=%d", filmId); }
+        return "redirect:/filmsList";
     }
 
     @GetMapping("/addFilm")
