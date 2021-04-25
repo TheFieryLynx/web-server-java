@@ -57,6 +57,7 @@ public class GreetingController {
         if (film_id != null) {
             film = filmService.findFilmById(film_id);
             if (film != null) {
+                film.setFilm_name(film_name);
                 film.setProducer(producer);
                 film.setRelease_year(release_year);
                 film.setCassette_total_number(cassette_total_number);
@@ -119,5 +120,4 @@ public class GreetingController {
         model.addAttribute("clientName", client.getClient_name());
         return "client";
     }
-
 }

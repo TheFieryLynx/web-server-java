@@ -1,7 +1,8 @@
 # web-server-java (Видеопрокат)
 
-## how to run
+## How to run
 
+* initialize database. Scripts are in  `SQLscripts`
 * build jar (maybe using intellij IDEA)
 * run jar on specified address and port  
 `$ java -jar -Dserver.addres=localhost -Dserver.port=8080 ./out/artifacts/web_server_java_jar/web-server-java.jar`

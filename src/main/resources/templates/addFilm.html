@@ -8,7 +8,7 @@
 <a href="/">Root page</a><br><br><br>
 
 <form action="/saveFilm" method="post">
-    <input type="hidden" name="id" th:value="${film_id}" />
+    <input type="hidden" name="film_id" th:value="${film_id}" />
 
     <label for="film_name">Film name:</label>
     <input type="text" id="film_name" name="film_name" th:value="${film_name}"><br><br>
