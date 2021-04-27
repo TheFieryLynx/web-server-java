@@ -1,7 +1,5 @@
 package controllers;
 
-import dataAccess.client.Client;
-import dataAccess.client.ClientService;
 import dataAccess.film.Film;
 import dataAccess.film.FilmService;
 import org.springframework.stereotype.Controller;
@@ -13,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-public class GreetingController {
+public class FilmController {
     FilmService filmService = new FilmService();
-    ClientService clientService = new ClientService();
 
     @GetMapping("/filmsList")
     public String filmsListPage(Model model) {
@@ -76,7 +73,6 @@ public class GreetingController {
             changeIsSuccessful = filmService.addFilm(film);
         }
 
-
         if (changeIsSuccessful) {
             // todo return page with params somehow pretty
             return String.format("redirect:/film?id=%d", film.getFilm_id());
@@ -84,7 +80,7 @@ public class GreetingController {
         return "filmsList";  // todo show error
     }
 
-    @GetMapping("/deleteFilm")
+    @PostMapping("/deleteFilm")
     public String deleteFilmPage(@RequestParam(name = "id", required = true) Integer filmId, Model model){
         boolean result = filmService.safetyDeleteFilmById(filmId);
         if (!result){ return String.format("redirect:/film?id=%d", filmId); }
@@ -111,13 +107,5 @@ public class GreetingController {
         model.addAttribute("cassette_price", film.getCassette_price());
         model.addAttribute("disk_price", film.getDisk_price());
         return "addFilm";
-    }
-
-    @GetMapping("/client")
-    public String clientPage(@RequestParam(name = "id", required = true) String clientId, Model model) {
-        model.addAttribute("clientId", clientId);
-        Client client = clientService.findClientById(Long.parseLong(clientId));
-        model.addAttribute("clientName", client.getClient_name());
-        return "client";
     }
 }
