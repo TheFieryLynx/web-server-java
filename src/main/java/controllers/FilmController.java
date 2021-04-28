@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import java.util.Date;
+
 
 import java.util.List;
 
@@ -25,7 +27,10 @@ public class FilmController {
     }
 
     @GetMapping("/film")
-    public String filmPage(@RequestParam(name = "film_id", required = true) int film_id, Model model) {
+    public String filmPage(@RequestParam(name = "film_id", required = true) int film_id,
+                           @RequestParam(name = "issue_date_from", required = false) String issue_date_from,
+                           @RequestParam(name = "issue_date_to", required = false) String issue_date_to,
+                           Model model) {
         model.addAttribute("film_id", film_id);
         Film film = filmService.findFilmById(film_id);
         model.addAttribute("filmName", film.getFilm_name());
@@ -39,7 +44,24 @@ public class FilmController {
         model.addAttribute("disk_price", film.getDisk_price());
         model.addAttribute("film_is_removed", film.isFilm_is_removed());
 
-        List<Order> orders = orderService.getOrdersOfFilmForSpecifiedPeriod(film_id, null, null);
+        Date startDate;
+        try {
+            startDate = java.sql.Date.valueOf(issue_date_from);
+            model.addAttribute("issue_date_from", startDate);
+        } catch (IllegalArgumentException e) {
+            startDate = null;
+            model.addAttribute("issue_date_from", "the beginning of the history");
+        }
+        Date endDate;
+        try {
+            endDate = java.sql.Date.valueOf(issue_date_to);
+            model.addAttribute("issue_date_to", endDate);
+        } catch (IllegalArgumentException e) {
+            endDate = null;
+            model.addAttribute("issue_date_to", "the end of the history");
+        }
+
+        List<Order> orders = orderService.getOrdersOfFilmForSpecifiedPeriod(film_id, startDate, endDate);
         model.addAttribute("orders", orders);
         return "film";
     }
