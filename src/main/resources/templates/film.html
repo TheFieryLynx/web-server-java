@@ -8,7 +8,7 @@
 <body>
 <a href="/">Root page</a><br><br><br>
 
-<p th:text="'Film id: ' + ${filmId}"></p>
+<p th:text="'Film id: ' + ${film_id}"></p>
 <p th:text="'Film name: ' + ${filmName}"></p>
 <p th:text="'Producer: ' + ${producer}"></p>
 <p th:text="'Release year: ' + ${release_year}"></p>
@@ -21,14 +21,38 @@
 <p th:text="'Film is removed: ' + ${film_is_removed}"></p>
 
 <form method="post" action="/addFilm">
-    <input type="hidden" name="id" th:value="${filmId}" />
+    <input type="hidden" name="film_id" th:value="${film_id}" />
     <button type="submit">Edit film info</button>
 </form>
 <br>
 <form method="post" action="/deleteFilm">
-    <input type="hidden" name="id" th:value="${filmId}" />
+    <input type="hidden" name="film_id" th:value="${film_id}" />
     <button type="submit">Delete film</button>
 </form>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th> Client Name </th>
+        <th> Issue date </th>
+        <th> Return date </th>
+        <th> Medium </th>
+        <th> Order price </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${orders.empty}">
+        <td colspan="6"> No films here </td>
+    </tr>
+    <tr th:each="order : ${orders}">
+        <td><span th:text="${order.getClient().getClient_name()}"> </span></td>
+        <td><span th:text="${order.getFilm_issue_date()}"> </span></td>
+        <td><span th:text="${order.getFilm_return_date()}"> </span></td>
+        <td><span th:text="${order.getMedium()}"> </span></td>
+        <td><span th:text="${order.getPrice()}"> </span></td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>

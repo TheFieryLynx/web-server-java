@@ -27,7 +27,7 @@
         <td colspan="6"> No films here </td>
     </tr>
     <tr th:each="film : ${films}">
-        <td><a th:href="'/film?id=' + ${film.getFilm_id()}"> <span th:text="${film.getFilm_name()}"> </span> </a></td>
+        <td><a th:href="'/film?film_id=' + ${film.getFilm_id()}"> <span th:text="${film.getFilm_name()}"> </span> </a></td>
         <td><span th:text="${film.getProducer()}"> </span></td>
         <td><span th:text="${film.getRelease_year()}"> </span></td>
         <td><span th:text="${film.getCassette_price()}"> </span></td>

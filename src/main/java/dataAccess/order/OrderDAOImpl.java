@@ -32,6 +32,11 @@ public class OrderDAOImpl extends GenericDAO_CRUD<Order> implements OrderDAO{
 
     public List<Order> getOrdersOfClientForSpecifiedPeriod(long client_id, Date startDate, Date endDate) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+
+        // todo: it is a workaround to avoid writing 3 SQL request
+        if (startDate == null) { startDate = java.sql.Date.valueOf("0001-01-01"); }
+        if (endDate == null) { endDate = java.sql.Date.valueOf("9999-12-12"); }
+
         Query<Order> q = session.createQuery("select ord from Order ord " +
                 "where ord.client.client_id = :clientId and " +
                 ":sDate <= ord.film_issue_date and " +

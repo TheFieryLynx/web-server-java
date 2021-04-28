@@ -2,6 +2,8 @@ package controllers;
 
 import dataAccess.film.Film;
 import dataAccess.film.FilmService;
+import dataAccess.order.Order;
+import dataAccess.order.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import java.util.List;
 @Controller
 public class FilmController {
     FilmService filmService = new FilmService();
+    OrderService orderService = new OrderService();
 
     @GetMapping("/filmsList")
     public String filmsListPage(Model model) {
@@ -22,9 +25,9 @@ public class FilmController {
     }
 
     @GetMapping("/film")
-    public String filmPage(@RequestParam(name = "id", required = true) String filmId, Model model) {
-        model.addAttribute("filmId", filmId);
-        Film film = filmService.findFilmById(Long.parseLong(filmId));
+    public String filmPage(@RequestParam(name = "film_id", required = true) int film_id, Model model) {
+        model.addAttribute("film_id", film_id);
+        Film film = filmService.findFilmById(film_id);
         model.addAttribute("filmName", film.getFilm_name());
         model.addAttribute("producer", film.getProducer());
         model.addAttribute("release_year", film.getRelease_year());
@@ -35,6 +38,9 @@ public class FilmController {
         model.addAttribute("cassette_price", film.getCassette_price());
         model.addAttribute("disk_price", film.getDisk_price());
         model.addAttribute("film_is_removed", film.isFilm_is_removed());
+
+        List<Order> orders = orderService.getOrdersOfFilmForSpecifiedPeriod(film_id, null, null);
+        model.addAttribute("orders", orders);
         return "film";
     }
 
@@ -75,30 +81,30 @@ public class FilmController {
 
         if (changeIsSuccessful) {
             // todo return page with params somehow pretty
-            return String.format("redirect:/film?id=%d", film.getFilm_id());
+            return String.format("redirect:/film?film_id=%d", film.getFilm_id());
         }
         return "filmsList";  // todo show error
     }
 
     @PostMapping("/deleteFilm")
-    public String deleteFilmPage(@RequestParam(name = "id", required = true) Integer filmId, Model model){
-        boolean result = filmService.safetyDeleteFilmById(filmId);
-        if (!result){ return String.format("redirect:/film?id=%d", filmId); }
+    public String deleteFilmPage(@RequestParam(name = "film_id", required = true) Integer film_id, Model model){
+        boolean result = filmService.safetyDeleteFilmById(film_id);
+        if (!result){ return String.format("redirect:/film?id=%d", film_id); }
         return "redirect:/filmsList";
     }
 
-    @GetMapping("/addFilm")
-    public String addFilmPage(@RequestParam(name = "id", required = false) Integer filmId, Model model) {
-        if (filmId == null) {
+    @PostMapping("/addFilm")
+    public String addFilmPage(@RequestParam(name = "film_id", required = false) Integer film_id, Model model) {
+        if (film_id == null) {
             return "addFilm";
         }
 
-        Film film = filmService.findFilmById(filmId);
+        Film film = filmService.findFilmById(film_id);
         if (film == null) {
             return "addFilm";
         }
 
-        model.addAttribute("film_id", filmId);
+        model.addAttribute("film_id", film_id);
         model.addAttribute("film_name", film.getFilm_name());
         model.addAttribute("producer", film.getProducer());
         model.addAttribute("release_year", film.getRelease_year());
