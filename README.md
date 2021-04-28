@@ -29,8 +29,8 @@ $ java -jar -Dserver.addres=localhost -Dserver.port=8080 ./out/artifacts/web_ser
 
 docker:
 ```
-docker build --build-arg JAR_FILE=target/web-server-java-1.0-SNAPSHOT.jar -t my-spring-boot .
-docker run --rm --net=host -e HOST="127.0.0.1" -e PORT=8081  my-spring-boot
+docker build --build-arg JAR_FILE=target/web-server-java-1.0-SNAPSHOT.jar -t mariamsu/web-server-java:v0.2 .
+docker run --rm --net=host -e HOST="127.0.0.1" -e PORT=8080 mariamsu/web-server-java:v0.2 
 ```
 
 ## Architecture:
