@@ -40,7 +40,7 @@ public class OrderDAOImpl extends GenericDAO_CRUD<Order> implements OrderDAO{
         Query<Order> q = session.createQuery("select ord from Order ord " +
                 "where ord.client.client_id = :clientId and " +
                 ":sDate <= ord.film_issue_date and " +
-                "ord.film_issue_date <= :eDate", Order.class)
+                "ord.film_issue_date <= :eDate order by ord.film_issue_date", Order.class)
                 .setParameter("clientId", client_id)
                 .setParameter("sDate", startDate, TemporalType.DATE)
                 .setParameter("eDate", endDate, TemporalType.DATE);
@@ -60,7 +60,7 @@ public class OrderDAOImpl extends GenericDAO_CRUD<Order> implements OrderDAO{
         Query<Order> q = session.createQuery("select ord from Order ord " +
                 "where ord.film.film_id = :filmId and " +
                 ":sDate <= ord.film_issue_date and " +
-                "ord.film_issue_date <= :eDate", Order.class)
+                "ord.film_issue_date <= :eDate order by ord.film_issue_date", Order.class)
                 .setParameter("filmId", film_id)
                 .setParameter("sDate", startDate, TemporalType.DATE)
                 .setParameter("eDate", endDate, TemporalType.DATE);
@@ -73,7 +73,8 @@ public class OrderDAOImpl extends GenericDAO_CRUD<Order> implements OrderDAO{
     public List<Order> getOrdersOfClientNotReturned(long client_id) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query<Order> q = session.createQuery("select ord from Order ord " +
-                "where ord.client.client_id = :clientId and ord.film_return_date is null", Order.class)
+                "where ord.client.client_id = :clientId and ord.film_return_date is null" +
+                " order by ord.film_issue_date", Order.class)
                 .setParameter("clientId", client_id);
         q.getResultList();
         List<Order> orders = q.list();

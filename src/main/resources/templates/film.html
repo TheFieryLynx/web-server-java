@@ -44,6 +44,7 @@
 Orders shown with issue date from
 <b><span th:text="${issue_date_from}"></span></b> to
 <b><span th:text="${issue_date_to}"></span></b>:
+<br>
 <table>
     <thead>
     <tr>
@@ -56,7 +57,7 @@ Orders shown with issue date from
     </thead>
     <tbody>
     <tr th:if="${orders.empty}">
-        <td colspan="6"> No films here</td>
+        <td colspan="6"> No orders here</td>
     </tr>
     <tr th:each="order : ${orders}">
         <td><a th:href="'/client?client_id=' + ${order.getClient().getClient_id()}">

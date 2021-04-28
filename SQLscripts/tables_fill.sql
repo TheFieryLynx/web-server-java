@@ -25,7 +25,7 @@ INSERT INTO Clients (client_name, phone) VALUES
 
 INSERT INTO Orders (client_id, film_id, medium, price, film_issue_date, film_return_date) VALUES
 (11, 6, 'cassette', 200, '2020-01-12', '2020-02-13'),
-(12, 6, 'disc', 300, '2021-01-12', '2021-01-12');
+(12, 6, 'disc', 300, '2019-11-13', '2019-11-15');
 
 INSERT INTO Orders (client_id, film_id, medium, price, film_issue_date) VALUES
 (4, 2, 'cassette', 300, '2021-01-10'),
