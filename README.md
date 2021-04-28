@@ -1,5 +1,7 @@
 # web-server-java (Видеопрокат)
 
+поднятый сервер: клац http://35.228.171.162/
+
 ## How to run
 
 * initialize database. Scripts are in  `SQLscripts`

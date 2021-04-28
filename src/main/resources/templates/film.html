@@ -45,7 +45,8 @@
         <td colspan="6"> No films here </td>
     </tr>
     <tr th:each="order : ${orders}">
-        <td><span th:text="${order.getClient().getClient_name()}"> </span></td>
+        <td><a th:href="'/client?client_id=' + ${order.getClient().getClient_id()}">
+            <span th:text="${order.getClient().getClient_name()}"> </span> </a></td>
         <td><span th:text="${order.getFilm_issue_date()}"> </span></td>
         <td><span th:text="${order.getFilm_return_date()}"> </span></td>
         <td><span th:text="${order.getMedium()}"> </span></td>
