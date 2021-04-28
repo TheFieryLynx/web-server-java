@@ -14,17 +14,23 @@
   web_server_db=> \i <path to project root>/SQLscripts/tables_fill.sql 
   ```
 
-1. Build jar (this step also could be done using intellij IDEA)
+2. Build jar (this step also could be done using intellij IDEA)
 
   ```
   $ mvn -N io.takari:maven:wrapper  # setup maven wrapper
   $ ./mvnw package  # build executable jar 
   ```
 
-1. Run jar on specified address and port
+3. Run jar on specified address and port
 
 ```
 $ java -jar -Dserver.addres=localhost -Dserver.port=8080 ./out/artifacts/web_server_java_jar/web-server-java.jar
+```
+
+docker:
+```
+docker build --build-arg JAR_FILE=target/web-server-java-1.0-SNAPSHOT.jar -t my-spring-boot .
+docker run --rm --net=host -e HOST="127.0.0.1" -e PORT=8081  my-spring-boot
 ```
 
 ## Architecture:

@@ -48,9 +48,9 @@ Orders shown with issue date from
 <table>
     <thead>
     <tr>
-        <th> Client Name</th>
         <th> Issue date</th>
         <th> Return date</th>
+        <th> Client Name</th>
         <th> Medium</th>
         <th> Order price</th>
     </tr>
@@ -60,10 +60,10 @@ Orders shown with issue date from
         <td colspan="6"> No orders here</td>
     </tr>
     <tr th:each="order : ${orders}">
-        <td><a th:href="'/client?client_id=' + ${order.getClient().getClient_id()}">
-            <span th:text="${order.getClient().getClient_name()}"> </span> </a></td>
         <td><span th:text="${order.getFilm_issue_date()}"> </span></td>
         <td><span th:text="${order.getFilm_return_date()}"> </span></td>
+        <td><a th:href="'/client?client_id=' + ${order.getClient().getClient_id()}">
+            <span th:text="${order.getClient().getClient_name()}"> </span> </a></td>
         <td><span th:text="${order.getMedium()}"> </span></td>
         <td><span th:text="${order.getPrice()}"> </span></td>
     </tr>
