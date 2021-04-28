@@ -27,10 +27,10 @@
 $ java -jar -Dserver.addres=localhost -Dserver.port=8080 ./out/artifacts/web_server_java_jar/web-server-java.jar
 ```
 
-docker:
+4. *Optional* Build & run docker
 ```
-docker build --build-arg JAR_FILE=target/web-server-java-1.0-SNAPSHOT.jar -t mariamsu/web-server-java:v0.2 .
-docker run --rm --net=host -e HOST="127.0.0.1" -e PORT=8080 mariamsu/web-server-java:v0.2 
+$ docker build --build-arg JAR_FILE=target/web-server-java-1.0-SNAPSHOT.jar -t mariamsu/web-server-java:v0.2 .
+$ docker run --rm --net=host -e HOST="127.0.0.1" -e PORT=8080 mariamsu/web-server-java:v0.2 
 ```
 
 ## Architecture:
