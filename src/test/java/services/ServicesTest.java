@@ -119,7 +119,7 @@ public class ServicesTest {
         final Order[] dataOrders = TablesTestData.getOrders(dataClients, dataFilms);
         final long nonExistentId = 100;
         final long existentId = 1;
-        final Order orderUpdated = new Order(dataClients[0], dataFilms[1], "disk", 50,
+        final Order orderUpdated = new Order(dataClients[0], dataFilms[1], "disc", 50,
                 java.sql.Date.valueOf("2008-11-01"), java.sql.Date.valueOf("2008-12-01"));
 
         // fill the table

@@ -24,7 +24,7 @@ public class OrderService {
             case "cassette":
                 int cassette_number = film.getCassette_available_number();
                 if (cassette_number >= 1) {
-                    film.setDisc_available_number(cassette_number - 1);
+                    film.setCassette_available_number(cassette_number - 1);
                 } else return false;
                 break;
 

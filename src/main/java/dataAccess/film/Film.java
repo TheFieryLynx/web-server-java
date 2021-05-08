@@ -155,8 +155,9 @@ public class Film implements EntityWithId {
                 this.producer.equals(other.producer) &&
                 (this.cassette_total_number == other.cassette_total_number) &&
                 (this.disc_total_number == other.disc_total_number) &&
-                (this.cassette_available_number == other.cassette_available_number) &&
-                (this.disc_available_number == other.disc_available_number) &&
+//                 due to problems with data consistency (see README)
+//                (this.cassette_available_number == other.cassette_available_number) &&
+//                (this.disc_available_number == other.disc_available_number) &&
                 (this.cassette_price == other.cassette_price) &&
                 (this.disk_price == other.disk_price) &&
                 (this.film_is_removed == other.film_is_removed);

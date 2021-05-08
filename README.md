@@ -63,6 +63,8 @@ But it was the simplest solution.
   But it also could be got by counting not returned orders in `ordes` table.
   Thus we need to be carefully when changing this data.
 
+## ================
+
 Предполагается, что приложение используется сотрудником видеопроката, поэтому у него есть доступ ко всей информации в
 базе данных и возможность выполнять все поддерживаемые операции.  
 Схема навигации между страницами:
