@@ -31,18 +31,8 @@ public class FilmController {
                            @RequestParam(name = "issue_date_from", required = false) String issue_date_from,
                            @RequestParam(name = "issue_date_to", required = false) String issue_date_to,
                            Model model) {
-        model.addAttribute("film_id", film_id);
         Film film = filmService.findFilmById(film_id);
-        model.addAttribute("filmName", film.getFilm_name());
-        model.addAttribute("producer", film.getProducer());
-        model.addAttribute("release_year", film.getRelease_year());
-        model.addAttribute("cassette_total_number", film.getCassette_total_number());
-        model.addAttribute("disc_total_number", film.getDisc_total_number());
-        model.addAttribute("cassette_available_number", film.getCassette_available_number());
-        model.addAttribute("disc_available_number", film.getDisc_available_number());
-        model.addAttribute("cassette_price", film.getCassette_price());
-        model.addAttribute("disk_price", film.getDisk_price());
-        model.addAttribute("film_is_removed", film.getFilm_is_removed());
+        model.addAttribute("film", film);
 
         Date startDate;
         try {
@@ -105,7 +95,8 @@ public class FilmController {
             // todo return page with params somehow pretty
             return String.format("redirect:/film?film_id=%d", film.getFilm_id());
         }
-        return "filmsList";  // todo show error
+        model.addAttribute("error_msg", "Adding the order was not successful");
+        return "errorShow";
     }
 
     @PostMapping("/filmDelete")
@@ -117,15 +108,17 @@ public class FilmController {
 
     @PostMapping("/filmAdd")
     public String filmAddPage(@RequestParam(name = "film_id", required = false) Integer film_id, Model model) {
-        if (film_id == null) {
-            return "filmAdd";
-        }
+        // this method fill html with info about film if film_id != null (update film)
+        // and return not filled html if film_id == null (add film)
+        if (film_id == null) { return "filmAdd"; }
 
         Film film = filmService.findFilmById(film_id);
         if (film == null) {
-            return "addFilm";
+            model.addAttribute("error_msg", "There is no film with id=" + film_id);
+            return "errorShow";
         }
 
+        // workaround: it wold be better to set only `film`. But it throws an error when film == null
         model.addAttribute("film_id", film_id);
         model.addAttribute("film_name", film.getFilm_name());
         model.addAttribute("producer", film.getProducer());
@@ -134,6 +127,6 @@ public class FilmController {
         model.addAttribute("disc_total_number", film.getDisc_total_number());
         model.addAttribute("cassette_price", film.getCassette_price());
         model.addAttribute("disk_price", film.getDisk_price());
-        return "addFilm";
+        return "filmAdd";
     }
 }
