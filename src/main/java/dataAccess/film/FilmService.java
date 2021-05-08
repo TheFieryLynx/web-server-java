@@ -4,9 +4,7 @@ import dataAccess.order.Order;
 import dataAccess.order.OrderDAO;
 import dataAccess.order.OrderDAOImpl;
 
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 public class FilmService {
@@ -44,7 +42,7 @@ public class FilmService {
 
     public List<Film> loadAllActualSorted() {
         List<Film> films = loadAll();
-        films.removeIf(Film::isFilm_is_removed);
+        films.removeIf(Film::getFilm_is_removed);
         films.sort(Comparator.comparing(Film::getFilm_name));
         return films;
     }

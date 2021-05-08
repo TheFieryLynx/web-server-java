@@ -137,7 +137,7 @@ public class Film implements EntityWithId {
     }
 
     @Column(name = "film_is_removed")
-    public boolean isFilm_is_removed() {
+    public boolean getFilm_is_removed() {
         return film_is_removed;
     }
 

@@ -139,7 +139,7 @@ public class Order implements EntityWithId {
     }
 
     public boolean checkCorrectness(){
-        return (medium.equals("disk") || medium.equals("cassette") &&
+        return (medium.equals("disc") || medium.equals("cassette") &&
                 (this.film_issue_date != null));
     }
 }

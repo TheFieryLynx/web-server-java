@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>order info</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+<a href="/">Root page</a><br><br><br>
+
+<p th:text="'Order id: ' + ${order.getOrder_id()}"></p>
+<p th:text="'Client name: ' + ${order.getClient().getClient_name()}"></p>
+<p th:text="'Film name: ' + ${order.getFilm().getFilm_name()}"></p>
+<p th:text="'Film issue date: ' + ${order.getFilm_issue_date()}"></p>
+<p th:text="'Film return date: ' + ${order.getFilm_return_date()}"></p>
+<p th:text="'Mediun: ' + ${order.getMedium()}"></p>
+<p th:text="'Price: ' + ${order.getPrice()}"></p>
+
+<!--<form method="post" action="/orderAdd">-->
+<!--    <input type="hidden" name="film_id" th:value="${film_id}"/>-->
+<!--    <button type="submit">Edit film info</button>-->
+<!--</form>-->
+<!--<br>-->
+<!--<form method="post" action="/orderDelete">-->
+<!--    <input type="hidden" name="film_id" th:value="${film_id}"/>-->
+<!--    <button type="submit">Delete film</button>-->
+<!--</form>-->
+
+</body>
+</html>

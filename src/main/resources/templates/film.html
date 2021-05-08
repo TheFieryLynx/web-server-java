@@ -20,12 +20,12 @@
 <p th:text="'Disk price: ' + ${disk_price}"></p>
 <p th:text="'Film is removed: ' + ${film_is_removed}"></p>
 
-<form method="post" action="/addFilm">
+<form method="post" action="/filmAdd">
     <input type="hidden" name="film_id" th:value="${film_id}"/>
     <button type="submit">Edit film info</button>
 </form>
 <br>
-<form method="post" action="/deleteFilm">
+<form method="post" action="/filmDelete">
     <input type="hidden" name="film_id" th:value="${film_id}"/>
     <button type="submit">Delete film</button>
 </form>
@@ -52,7 +52,7 @@ Orders shown with issue date from
         <th> Return date</th>
         <th> Client Name</th>
         <th> Medium</th>
-        <th> Order price</th>
+        <th> Price</th>
     </tr>
     </thead>
     <tbody>
@@ -61,7 +61,12 @@ Orders shown with issue date from
     </tr>
     <tr th:each="order : ${orders}">
         <td><span th:text="${order.getFilm_issue_date()}"> </span></td>
-        <td><span th:text="${order.getFilm_return_date()}"> </span></td>
+
+        <td th:if="${order.getFilm_return_date() == null}">
+            <a th:href="'/order?return=true&order_id=' + ${order.getOrder_id()}"> return film </a></td>
+        <td th:if="${order.getFilm_return_date() != null}">
+            <span th:text="${order.getFilm_return_date()}"> </span></td>
+
         <td><a th:href="'/client?client_id=' + ${order.getClient().getClient_id()}">
             <span th:text="${order.getClient().getClient_name()}"> </span> </a></td>
         <td><span th:text="${order.getMedium()}"> </span></td>

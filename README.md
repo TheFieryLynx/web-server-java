@@ -29,8 +29,10 @@ $ java -jar -Dserver.addres=localhost -Dserver.port=8080 ./out/artifacts/web_ser
 
 4. *Optional* Build & run docker
 ```
-$ docker build --build-arg JAR_FILE=target/web-server-java-1.0-SNAPSHOT.jar -t mariamsu/web-server-java:v0.2 .
-$ docker run --rm --net=host -e HOST="127.0.0.1" -e PORT=8080 mariamsu/web-server-java:v0.2 
+$ docker build --build-arg JAR_FILE=target/web-server-java-1.0-SNAPSHOT.jar -t mariamsu/web-server-java:v0.3 .
+$ docker run --rm --net=host --detach --name web_server -e HOST="127.0.0.1" -e PORT=80 mariamsu/web-server-java:v0.3
+
+$ docker kill web_server
 ```
 
 ## Architecture:
@@ -51,6 +53,15 @@ There is `GenericDAO_CRUD class` that has templates for main create, read, updat
 
 **services tests**: I think it is wrong to test interaction of the application with the database by using unit tests.
 But it was the simplest solution.
+
+## Note
+* **Service's methods** return `false` if error occurred. 
+  It would be better to return exception with error explanation.
+  
+* There are problems with **data consistency**. 
+  The information about `cassette_available_number` and `disc_available_number` is saved in columns of `films` table. 
+  But it also could be got by counting not returned orders in `ordes` table.
+  Thus we need to be carefully when changing this data.
 
 Предполагается, что приложение используется сотрудником видеопроката, поэтому у него есть доступ ко всей информации в
 базе данных и возможность выполнять все поддерживаемые операции.  

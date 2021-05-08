@@ -42,7 +42,7 @@ public class FilmController {
         model.addAttribute("disc_available_number", film.getDisc_available_number());
         model.addAttribute("cassette_price", film.getCassette_price());
         model.addAttribute("disk_price", film.getDisk_price());
-        model.addAttribute("film_is_removed", film.isFilm_is_removed());
+        model.addAttribute("film_is_removed", film.getFilm_is_removed());
 
         Date startDate;
         try {
@@ -66,8 +66,8 @@ public class FilmController {
         return "film";
     }
 
-    @PostMapping("/saveFilm")
-    public String saveFilmPage(@RequestParam(name = "film_id", required = false) Integer film_id,
+    @PostMapping("/filmSave")
+    public String filmSavePage(@RequestParam(name = "film_id", required = false) Integer film_id,
                                @RequestParam(name = "film_name") String film_name,
                                @RequestParam(name = "producer") String producer,
                                @RequestParam(name = "release_year") int release_year,
@@ -108,17 +108,17 @@ public class FilmController {
         return "filmsList";  // todo show error
     }
 
-    @PostMapping("/deleteFilm")
-    public String deleteFilmPage(@RequestParam(name = "film_id", required = true) Integer film_id, Model model){
+    @PostMapping("/filmDelete")
+    public String filmDeletePage(@RequestParam(name = "film_id", required = true) Integer film_id, Model model){
         boolean result = filmService.safetyDeleteFilmById(film_id);
         if (!result){ return String.format("redirect:/film?id=%d", film_id); }
         return "redirect:/filmsList";
     }
 
-    @PostMapping("/addFilm")
-    public String addFilmPage(@RequestParam(name = "film_id", required = false) Integer film_id, Model model) {
+    @PostMapping("/filmAdd")
+    public String filmAddPage(@RequestParam(name = "film_id", required = false) Integer film_id, Model model) {
         if (film_id == null) {
-            return "addFilm";
+            return "filmAdd";
         }
 
         Film film = filmService.findFilmById(film_id);

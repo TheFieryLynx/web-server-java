@@ -1,5 +1,8 @@
 package dataAccess.client;
 
+import dataAccess.film.Film;
+
+import java.util.Comparator;
 import java.util.List;
 
 public class ClientService {
@@ -20,4 +23,11 @@ public class ClientService {
     public Client findClientById(long id) {return this.clientDAO.findById(id);}
 
     public List<Client> loadAll() {return this.clientDAO.loadAll();}
+
+    public List<Client> loadAllActualSorted() {
+        List<Client> client = loadAll();
+        client.removeIf(Client::getClient_is_removed);
+        client.sort(Comparator.comparing(Client::getClient_name));
+        return client;
+    }
 }
