@@ -10,15 +10,14 @@ public class Film implements EntityWithId {
     private long film_id = -1;
     private String film_name;
     private String producer;
-    private int release_year;
-    private int cassette_total_number;
-    private int disc_total_number;
-    private int cassette_available_number;
-    private int disc_available_number;
-    private int cassette_price;
-    private int disk_price;
+    private Integer release_year;
+    private Integer cassette_total_number;
+    private Integer disc_total_number;
+    private Integer cassette_available_number;
+    private Integer disc_available_number;
+    private Integer cassette_price;
+    private Integer disk_price;
     private boolean film_is_removed;
-
 
     public Film() {}
 
@@ -74,7 +73,7 @@ public class Film implements EntityWithId {
     }
 
     @Column(name = "release_year")
-    public int getRelease_year() {
+    public Integer getRelease_year() {
         return release_year;
     }
 
@@ -83,7 +82,7 @@ public class Film implements EntityWithId {
     }
 
     @Column(name = "cassette_total_number")
-    public int getCassette_total_number() {
+    public Integer getCassette_total_number() {
         return cassette_total_number;
     }
 
@@ -92,7 +91,7 @@ public class Film implements EntityWithId {
     }
 
     @Column(name = "disc_total_number")
-    public int getDisc_total_number() {
+    public Integer getDisc_total_number() {
         return disc_total_number;
     }
 
@@ -101,7 +100,7 @@ public class Film implements EntityWithId {
     }
 
     @Column(name = "cassette_available_number")
-    public int getCassette_available_number() {
+    public Integer getCassette_available_number() {
         return cassette_available_number;
     }
 
@@ -110,7 +109,7 @@ public class Film implements EntityWithId {
     }
 
     @Column(name = "disc_available_number")
-    public int getDisc_available_number() {
+    public Integer getDisc_available_number() {
         return disc_available_number;
     }
 
@@ -119,7 +118,7 @@ public class Film implements EntityWithId {
     }
 
     @Column(name = "cassette_price")
-    public int getCassette_price() {
+    public Integer getCassette_price() {
         return cassette_price;
     }
 
@@ -128,7 +127,7 @@ public class Film implements EntityWithId {
     }
 
     @Column(name = "disk_price")
-    public int getDisk_price() {
+    public Integer getDisk_price() {
         return disk_price;
     }
 
@@ -153,13 +152,13 @@ public class Film implements EntityWithId {
         return (this.film_id == other.film_id) &&
                 this.film_name.equals(other.film_name) &&
                 this.producer.equals(other.producer) &&
-                (this.cassette_total_number == other.cassette_total_number) &&
-                (this.disc_total_number == other.disc_total_number) &&
+                (this.cassette_total_number.equals(other.cassette_total_number)) &&
+                (this.disc_total_number.equals(other.disc_total_number)) &&
 //                 due to problems with data consistency (see README)
 //                (this.cassette_available_number == other.cassette_available_number) &&
 //                (this.disc_available_number == other.disc_available_number) &&
-                (this.cassette_price == other.cassette_price) &&
-                (this.disk_price == other.disk_price) &&
+                (this.cassette_price.equals(other.cassette_price)) &&
+                (this.disk_price.equals(other.disk_price)) &&
                 (this.film_is_removed == other.film_is_removed);
     }
 

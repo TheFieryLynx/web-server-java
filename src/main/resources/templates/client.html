@@ -1,12 +1,72 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>client info</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
+
 <body>
-<p th:text="'Client id: ' + ${clientId}"></p>
-<p th:text="'Client name: ' + ${clientName}"></p>
+<a href="/">Root page</a><br><br><br>
+
+<p th:text="'Client id: ' + ${client.getClient_id()}"></p>
+<p th:text="'Client name: ' + ${client.getClient_name()}"></p>
+<p th:text="'Phone: ' + ${client.getPhone()}"></p>
+<p th:text="'Client is removed: ' + ${client.getClient_is_removed()}"></p>
+
+<form method="post" action="/clientAdd">
+    <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
+    <button type="submit">Edit client info</button>
+</form>
+<br>
+<form method="post" action="/clientDelete">
+    <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
+    <button type="submit">Delete client</button>
+</form>
+<br>
+<form method="get" action="">
+    <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
+
+    <label for="issue_date_from">Issue date from:</label>
+    <input type="date" id="issue_date_from" name="issue_date_from"><br><br>
+
+    <label for="issue_date_to">Issue date to:</label>
+    <input type="date" id="issue_date_to" name="issue_date_to"><br><br>
+
+    <button type="submit">Search orders</button>
+</form>
+Orders shown with issue date from
+<b><span th:text="${issue_date_from}"></span></b> to
+<b><span th:text="${issue_date_to}"></span></b>:
+<br>
+<table>
+    <thead>
+    <tr>
+        <th> Issue date</th>
+        <th> Return date</th>
+        <th> Film name</th>
+        <th> Medium</th>
+        <th> Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${orders.empty}">
+        <td colspan="6"> No orders here</td>
+    </tr>
+    <tr th:each="order : ${orders}">
+        <td><span th:text="${order.getFilm_issue_date()}"> </span></td>
+
+        <td th:if="${order.getFilm_return_date() == null}">
+            <a th:href="'/order?return=true&order_id=' + ${order.getOrder_id()}"> return now </a></td>
+        <td th:if="${order.getFilm_return_date() != null}">
+            <span th:text="${order.getFilm_return_date()}"> </span></td>
+
+        <td><a th:href="'/film?film_id=' + ${order.getFilm().getFilm_id()}">
+            <span th:text="${order.getFilm().getFilm_name()}"> </span> </a></td>
+        <td><span th:text="${order.getMedium()}"> </span></td>
+        <td><span th:text="${order.getPrice()}"> </span></td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>

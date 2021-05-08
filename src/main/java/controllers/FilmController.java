@@ -72,6 +72,7 @@ public class FilmController {
         if (film_id != null) {
             film = filmService.findFilmById(film_id);
             if (film != null) {
+                //todo change available number
                 film.setFilm_name(film_name);
                 film.setProducer(producer);
                 film.setRelease_year(release_year);
@@ -110,7 +111,10 @@ public class FilmController {
     public String filmAddPage(@RequestParam(name = "film_id", required = false) Integer film_id, Model model) {
         // this method fill html with info about film if film_id != null (update film)
         // and return not filled html if film_id == null (add film)
-        if (film_id == null) { return "filmAdd"; }
+        if (film_id == null) {
+            model.addAttribute("film", new Film());
+            return "filmAdd";
+        }
 
         Film film = filmService.findFilmById(film_id);
         if (film == null) {
@@ -118,15 +122,7 @@ public class FilmController {
             return "errorShow";
         }
 
-        // workaround: it wold be better to set only `film`. But it throws an error when film == null
-        model.addAttribute("film_id", film_id);
-        model.addAttribute("film_name", film.getFilm_name());
-        model.addAttribute("producer", film.getProducer());
-        model.addAttribute("release_year", film.getRelease_year());
-        model.addAttribute("cassette_total_number", film.getCassette_total_number());
-        model.addAttribute("disc_total_number", film.getDisc_total_number());
-        model.addAttribute("cassette_price", film.getCassette_price());
-        model.addAttribute("disk_price", film.getDisk_price());
+        model.addAttribute("film", film);
         return "filmAdd";
     }
 }

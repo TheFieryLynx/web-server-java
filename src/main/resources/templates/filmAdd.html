@@ -8,28 +8,28 @@
 <a href="/">Root page</a><br><br><br>
 
 <form action="/filmSave" method="post">
-    <input type="hidden" name="film_id" th:value="${film_id}" />
+    <input type="hidden" name="film_id" th:value="${film.getFilm_id()}" />
 
     <label for="film_name">Film name:</label>
-    <input type="text" id="film_name" name="film_name" th:value="${film_name}"><br><br>
+    <input type="text" id="film_name" name="film_name" th:value="${film.getFilm_name()}"><br><br>
 
     <label for="producer">Producer:</label>
-    <input type="text" id="producer" name="producer" th:value="${producer}"><br><br>
+    <input type="text" id="producer" name="producer" th:value="${film.getProducer()}"><br><br>
 
     <label for="release_year">Release year:</label>
-    <input type="number" id="release_year" name="release_year" th:value="${release_year}"><br><br>
+    <input type="number" id="release_year" name="release_year" th:value="${film.getRelease_year()}"><br><br>
 
     <label for="cassette_total_number">Cassette total number:</label>
-    <input type="number" id="cassette_total_number" name="cassette_total_number" th:value="${cassette_total_number}"><br><br>
+    <input type="number" id="cassette_total_number" name="cassette_total_number" th:value="${film.getCassette_total_number()}"><br><br>
 
     <label for="disc_total_number">Disc total number</label>
-    <input type="number" id="disc_total_number" name="disc_total_number" th:value="${disc_total_number}"><br><br>
+    <input type="number" id="disc_total_number" name="disc_total_number" th:value="${film.getDisc_total_number()}"><br><br>
 
     <label for="cassette_price">Cassette price:</label>
-    <input type="number" id="cassette_price" name="cassette_price" th:value="${cassette_price}"><br><br>
+    <input type="number" id="cassette_price" name="cassette_price" th:value="${film.getCassette_price()}"><br><br>
 
     <label for="disk_price">Disk price:</label>
-    <input type="number" id="disk_price" name="disk_price" th:value="${disk_price}"><br><br>
+    <input type="number" id="disk_price" name="disk_price" th:value="${film.getDisk_price()}"><br><br>
 
     <input type="submit" value="Submit">
 </form>

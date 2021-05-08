@@ -47,6 +47,9 @@ class for every table.
 * **DAOImplementation** - class, that implements communication with the database.
 * **Service** - class, that implements business logic and call DAO methods.
 
+
+* **Controller** - class, that implements web user interface logic.
+
 There is `GenericDAO_CRUD class` that has templates for main create, read, update, delete methods of DAO classes.
 
 ## Tests
@@ -56,7 +59,7 @@ But it was the simplest solution.
 
 ## Note
 * **Service's methods** return `false` if an error occurred. 
-  It would be better to return exception with the error explanation.
+  It would be better to return an exception with the error explanation.
   
 * There are problems with **data consistency**. 
   The information about `cassette_available_number` and `disc_available_number`

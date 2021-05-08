@@ -9,11 +9,12 @@
 <a href="/">Root page</a><br><br><br>
 
 <form action="/orderSave" method="post">
-    <label for="film_id">Choose a film:</label><br>
+    <label for="film_id">Choose a film (Cassette/Disc available):</label><br>
     <select id="film_id" name="film_id" size="6">
         <option th:each="film : ${films}"
                 th:value="${film.getFilm_id()}"
-                th:text="${film.getFilm_name()}"
+                th:text="${film.getFilm_name()} +
+                ' (' + ${film.getCassette_available_number()} + '/' + ${film.getDisc_available_number()} + ')'"
                 th:selected="${film.getFilm_id() == selected_film_id}">
         </option>
     </select>
@@ -28,10 +29,10 @@
     </select>
     <br><br>
     Choose medium type:
-    <input type="radio" id="disc" name="medium" value="disc">
-    <label for="disc">disc</label>
     <input type="radio" id="cassette" name="medium" value="cassette">
     <label for="cassette">cassette</label>
+    <input type="radio" id="disc" name="medium" value="disc">
+    <label for="disc">disc</label>
     <br><br>
     <label for="film_issue_date">Film issue date:</label>
     <input type="date" id="film_issue_date" name="film_issue_date" th:value="${today_date}"><br><br>

@@ -88,7 +88,8 @@ public class OrderController {
                 client, film, medium, price, film_issue_date, null);
         boolean savingIsSuccessful = orderService.addOrder(order);
         if (!savingIsSuccessful){
-            model.addAttribute("error_msg", "Adding the order was not successful");
+            model.addAttribute("error_msg", "Adding the order was not successful\n" +
+                    "This could have happened due to the lack of free mediums");
             return "errorShow";
         }
         return String.format("redirect:/order?order_id=%d", order.getOrder_id());
