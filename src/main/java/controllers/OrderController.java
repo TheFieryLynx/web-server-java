@@ -29,11 +29,11 @@ public class OrderController {
     public String orderAddPage(@RequestParam(name = "order_id", required = true) Integer order_id,
                                @RequestParam(name = "return", required = false) Boolean toReturn,
                                Model model) {
-        Order order = orderService.findOrderById(order_id);
+        Order order;
         if (toReturn != null && toReturn) {
-            Date todayDate = new Date(System.currentTimeMillis());
-            order.setFilm_return_date(todayDate);
-            orderService.updateOrder(order);
+            order = orderService.returnFilmByOrderId(order_id, null);
+        } else {
+            order = orderService.findOrderById(order_id);
         }
         model.addAttribute("order", order);
         return "order";

@@ -12,24 +12,6 @@ import java.util.List;
 
 public class OrderDAOImpl extends GenericDAO_CRUD<Order> implements OrderDAO{
 
-    public boolean returnFilmByOrderId(long id) {
-        // may be it was right to write this method only in service
-        // but here I can call methods which make this function faster
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Order returningOrder = session.get(Order.class, id);
-        if ((returningOrder == null) || (returningOrder.getFilm_return_date() != null)) {
-            // there is no order with the given key or the order is already returned
-            session.close();
-            return false;
-        }
-        session.beginTransaction();
-        returningOrder.setFilm_return_date(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
-        session.saveOrUpdate(returningOrder);
-        session.getTransaction().commit();
-        session.close();
-        return true;
-    }
-
     public List<Order> getOrdersOfClientForSpecifiedPeriod(long client_id, Date startDate, Date endDate) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
 

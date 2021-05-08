@@ -2,7 +2,8 @@ package dataAccess.order;
 
 import dataAccess.film.Film;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.sql.Date;
 import java.util.List;
 
 public class OrderService {
@@ -41,8 +42,36 @@ public class OrderService {
         return false;
     }
 
-    public boolean returnFilmByOrderId(long id) {
-        return this.orderDAO.returnFilmByOrderId(id);
+    public Order returnFilmByOrderId(long id, Date return_date) {
+        Order order = this.findOrderById(id);
+        if ((order == null) || (order.getFilm_return_date() != null)) {
+            // there is no order with the given key or the order is already returned
+            return null;
+        }
+        if (return_date == null){
+            return_date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        }
+        order.setFilm_return_date(return_date);
+        boolean savingIsSuccessful = this.updateOrder(order);
+        if (!savingIsSuccessful){ return null; }
+
+        // increase number of available mediums
+        Film film = order.getFilm();
+        switch (order.getMedium()) {
+            case "disc":
+                int disk_number = film.getDisc_available_number();
+                film.setDisc_available_number(disk_number + 1);
+                break;
+
+            case "cassette":
+                int cassette_number = film.getCassette_available_number();
+                film.setCassette_available_number(cassette_number + 1);
+                break;
+
+            default: return null;
+        }
+
+        return order;
     }
 
     public Order findOrderById(long id) { return this.orderDAO.findById(id); }

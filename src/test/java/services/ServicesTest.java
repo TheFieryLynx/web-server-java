@@ -146,8 +146,8 @@ public class ServicesTest {
         Assert.assertFalse(order_s.addOrder(orderUpdated));
 
         // return Film
-        Assert.assertFalse(order_s.returnFilmByOrderId(1));  // this order is already returned
-        Assert.assertTrue(order_s.returnFilmByOrderId(3));
+        Assert.assertNull(order_s.returnFilmByOrderId(1, null));  // this order is already returned
+        Assert.assertNotNull(order_s.returnFilmByOrderId(3, null));
 
         // remove all objects from the table
         for (Order order : orders) {

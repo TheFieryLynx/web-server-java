@@ -55,13 +55,15 @@ There is `GenericDAO_CRUD class` that has templates for main create, read, updat
 But it was the simplest solution.
 
 ## Note
-* **Service's methods** return `false` if error occurred. 
-  It would be better to return exception with error explanation.
+* **Service's methods** return `false` if an error occurred. 
+  It would be better to return exception with the error explanation.
   
 * There are problems with **data consistency**. 
-  The information about `cassette_available_number` and `disc_available_number` is saved in columns of `films` table. 
+  The information about `cassette_available_number` and `disc_available_number`
+  is saved in the columns of `films` table. 
   But it also could be got by counting not returned orders in `ordes` table.
   Thus we need to be carefully when changing this data.
+  I think it would be better to remove `...available_number` columns from database.
 
 ## ================
 
