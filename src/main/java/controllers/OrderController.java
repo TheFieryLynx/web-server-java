@@ -57,11 +57,17 @@ public class OrderController {
     }
 
     @PostMapping("/orderSave")
-    public String orderSavePage(@RequestParam(name = "film_id", required = true) int film_id,
-                                @RequestParam(name = "client_id", required = true) int client_id,
-                                @RequestParam(name = "medium", required = true) String medium,
-                                @RequestParam(name = "film_issue_date", required = true) Date film_issue_date,
+    public String orderSavePage(@RequestParam(name = "film_id", required = false) Integer film_id,
+                                @RequestParam(name = "client_id", required = false) Integer client_id,
+                                @RequestParam(name = "medium", required = false) String medium,
+                                @RequestParam(name = "film_issue_date", required = false) Date film_issue_date,
                                 Model model) {
+        if (film_id == null || client_id == null || medium == null || film_issue_date == null){
+            model.addAttribute("error_msg",
+                    "To create order film_id, client_id,  client_id, film_issue_date are required.\n" +
+                            "Provided: " + film_id + ", " + client_id + ", " + medium + ", " + film_issue_date);
+            return "errorShow";
+        }
         Client client = clientService.findClientById(client_id);
         if (client == null) {
             model.addAttribute("error_msg", "There is no client with id=" + client_id);
@@ -76,8 +82,8 @@ public class OrderController {
 
         int price;
         switch (medium) {
-            case "disc" -> price = film.getDisk_price();
             case "cassette" -> price = film.getCassette_price();
+            case "disc" -> price = film.getDisk_price();
             default -> {
                 model.addAttribute("error_msg", "Incorrect medium type=" + medium);
                 return "errorShow";
