@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Home page</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -12,11 +13,11 @@
     <button type="submit">Add client</button>
 </form>
 
-<table>
+<table class="table">
     <thead>
     <tr>
-        <th> Name </th>
-        <th> Phone </th>
+        <th scope="col"> Name </th>
+        <th scope="col"> Phone </th>
     </tr>
     </thead>
     <tbody>
@@ -24,7 +25,7 @@
         <td colspan="6"> No clients here </td>
     </tr>
     <tr th:each="client : ${clients}">
-        <td><a th:href="'/client?client_id=' + ${client.getClient_id()}"> <span th:text="${client.getClient_name()}"> </span> </a></td>
+        <td scope="row"><a th:href="'/client?client_id=' + ${client.getClient_id()}"> <span th:text="${client.getClient_name()}"> </span> </a></td>
         <td><span th:text="${client.getPhone()}"> </span></td>
     </tr>
     </tbody>
