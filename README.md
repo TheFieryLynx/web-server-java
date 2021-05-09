@@ -2,6 +2,8 @@
 
 поднятый сервер: клац http://35.228.171.162/
 
+[отчёт по первому этапу](./отчёт.md)
+
 ## How to run
 
 1. Initialize postgres database.
@@ -22,7 +24,7 @@ $ docker pull mariamsu/web-server-java:latest &&
 ```
 To work with the application open the appropriate URL in a browser.
 
-3. Kill application
+3. Kill the application
 
 ```shell
 $ docker kill web_server-java
@@ -39,7 +41,7 @@ web-server-java$ mvn -N io.takari:maven:wrapper  # setup maven wrapper
 web-server-java$ ./mvnw package  # build executable jar 
 ```
 
-3. *Optional* Run jar on specified address and port
+3. *(Optional)* Run jar on specified address and port
 
 ```shell
 web-server-java$ java -jar -Dserver.addres=localhost -Dserver.port=8080 ./out/artifacts/web_server_java_jar/web-server-java.jar
@@ -52,7 +54,7 @@ $ export WEB_V="v0.6"
 $ docker build --build-arg JAR_FILE=target/web-server-java-1.0.jar -t mariamsu/web-server-java:latest -t mariamsu/web-server-java:${WEB_V} .
 $ docker push mariamsu/web-server-java:latest ; docker push mariamsu/web-server-java:${WEB_V}
 ```
-docker push mariamsu/web-server-java:latest,${WEB_V}
+
 ## Architecture:
 
 The database of this application consist of 3 tables. There are POJO class, DAOInterface, DAOImplementation, service
@@ -75,7 +77,7 @@ There is `GenericDAO_CRUD class` that has templates for main create, read, updat
 **services tests**: I think it is wrong to test interaction of the application with the database by using unit tests.
 But it was the simplest solution.
 
-## Note
+## Notes
 
 * **Service's methods** return `false` if something went wrong. It would be better to raise an exception with the error
   explanation (see "FailFast").
@@ -90,59 +92,3 @@ But it was the simplest solution.
 
 * [Video](https://www.youtube.com/watch?v=H68EaWZvQtE) about an architecture of modern java web servers. 
   The main idea is that JSP (JavaServer Pages) is an outdated technology.
-
-## ================
-
-Предполагается, что приложение используется сотрудником видеопроката, поэтому у него есть доступ ко всей информации в
-базе данных и возможность выполнять все поддерживаемые операции.  
-Схема навигации между страницами:
-
-![Alt text](./Images/pages.png)
-
-Помимо изображенных на схеме стрелок перехода между страницами имеется возможность с каждой страницы вернуться на
-главную.
-
-При открытии приложения в браузере пользователь попадает на главную страницу, откуда он может перейти либо в раздел с
-информацией о клиентах, либо в раздел с информацией о фильмах.
-
-В разделе “список клиентов” пользователь видит всех клиентов видеопроката и может либо добавить нового клиента, либо
-перейти на страницу некоторого выбранного клиента.   
-На странице клиента пользователь видит персональную информацию о клиенте (имя, телефон) и информацию о заказах клиента.
-Пользователь может удалить клиента, поменять его персональную информацию, обновить информацию о заказах клиента. При
-нажатии на кнопку "редактировать" появляется отдельное окно с небольшой таблицей, где можно изменить информацию о
-клиенте.
-
-![Alt text](./Images/client.png)
-
-В разделе “список фильмов” пользователь видит все фильмы, имеющиеся в прокате и может либо добавить новый фильм, либо
-перейти на страницу конкретного фильма.  
-На странице фильма пользователь видит информацию о фильме: название, режиссер, год выпуска, кол-во имеющихся в прокате
-дисков и кассет, кто и когда брал кассеты и диски с этим фильмом и т.д. Пользователь может удалить фильм или изменить
-информацию о нем. При нажатии на кнопку "редактировать" появляется отдельное окно с небольшой таблицей, где можно
-изменить информацию о фильме.
-
-![Alt text](./Images/films.png)
-
-Схема базы данных:
-
-![Alt text](Images/db.png)
-
-## Сценарии использования приложения:
-
-- Получение списка клиентов: `Главная страница` -> `Список клиентов`.
-- Получение списка фильмов: `Главная страница` -> `Список фильмов`.
-- Получение истории выдачи и приема фильмов у клиента, списка находящихся у него фильмов: `Главная страница`
-  -> `Список клиентов` -> `Клиент, чья история нужна`.
-- Получение истории выдачи и приема экземпляров фильма, сводных сведений о наличии, выдаче и приеме фильмов за заданный
-  интервал времени: `Главная страница` -> `Список фильмов` -> `Фильм, информация о котором нужна` -> Указать
-  в `полях 'from' и 'to'` даты, за которые инетерсует история выдачи.
-- Добавление клиента: `Главная страница` -> `Список клиентов` -> Кнопка `добавить` -> В появившейся `таблице` сохранить
-  имя и телефон клиента.
-- Добавление записи о взятии фильма в прокат: `Главная страница` -> `Список клиентов` -> `Клиент, который берет фильм`
-  -> в `строке поиска` найти нужный фильм -> кнопка `выдать фильм` -> `выбрать носитель`.
-- Добавление записи о возвращении фильма: `Главная страница` -> `Список клиентов` -> `Клиент, который возвращает фильм`
-  -> В `списке взятых фильмов` выбрать возврвращаемый фильм -> кнопка `вернуть выбранное`.
-- Добавление фильма: `Главная страница` -> `Список фильмов` -> Кнопка `добавить` -> В появившейся `таблице` сохранить
-  данные о фильме.
-- Изменить цену проката фильма: `Главная страница` -> `Список фильмов` -> `Фильм, информация о котором меняется` ->
-  Кнопка `редактировать` -> В появившейся `таблице` изменить цену проката.
