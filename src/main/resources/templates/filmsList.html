@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Home page</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -12,16 +13,16 @@
     <button type="submit">Add film</button>
 </form>
 
-<table>
+<table class="table">
     <thead>
     <tr>
-        <th> Title </th>
-        <th> Producer </th>
-        <th> Release year </th>
-        <th> Cassette total/available </th>
-        <th> Disc total/available </th>
-        <th> Cassette price </th>
-        <th> Disk price </th>
+        <th scope="col"> Title </th>
+        <th scope="col"> Producer </th>
+        <th scope="col"> Release year </th>
+        <th scope="col"> Cassette total/available </th>
+        <th scope="col"> Disc total/available </th>
+        <th scope="col"> Cassette price </th>
+        <th scope="col"> Disk price </th>
     </tr>
     </thead>
     <tbody>
@@ -29,7 +30,7 @@
         <td colspan="8"> No films here </td>
     </tr>
     <tr th:each="film : ${films}">
-        <td><a th:href="'/film?film_id=' + ${film.getFilm_id()}"> <span th:text="${film.getFilm_name()}"> </span> </a></td>
+        <td scope="row"><a th:href="'/film?film_id=' + ${film.getFilm_id()}"> <span th:text="${film.getFilm_name()}"> </span> </a></td>
         <td><span th:text="${film.getProducer()}"> </span></td>
         <td><span th:text="${film.getRelease_year()}"> </span></td>
         <td><span th:text="${film.getCassette_total_number()} + '/' + ${film.getCassette_available_number()}"> </span></td>
