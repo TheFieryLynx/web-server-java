@@ -1,12 +1,15 @@
 package dataAccess.order;
 
 import dataAccess.film.Film;
+import dataAccess.film.FilmDAO;
+import dataAccess.film.FilmDAOImpl;
 
 import java.util.Calendar;
 import java.sql.Date;
 import java.util.List;
 
 public class OrderService {
+    private final FilmDAO filmDAO = new FilmDAOImpl();
     private final OrderDAO orderDAO = new OrderDAOImpl();
 
     public boolean addOrder(Order order) {
@@ -15,13 +18,6 @@ public class OrderService {
         // save order only if there is available mediums
         Film film = order.getFilm();
         switch (order.getMedium()) {
-            case "disc":
-                int disk_number = film.getDisc_available_number();
-                if (disk_number >= 1) {
-                    film.setDisc_available_number(disk_number - 1);
-                } else return false;
-                break;
-
             case "cassette":
                 int cassette_number = film.getCassette_available_number();
                 if (cassette_number >= 1) {
@@ -29,10 +25,20 @@ public class OrderService {
                 } else return false;
                 break;
 
+            case "disc":
+                int disk_number = film.getDisc_available_number();
+                if (disk_number >= 1) {
+                    film.setDisc_available_number(disk_number - 1);
+                } else return false;
+                break;
+
             default:
                 return false;
         }
-        return this.orderDAO.save(order);
+        // todo It looks badly. Here have to be something like transaction
+        boolean savingIsSuccessful = this.orderDAO.save(order);
+        if (!savingIsSuccessful) { return false; }
+        return this.filmDAO.update(film);
     }
 
     public boolean deleteOrderById(long id) { return this.orderDAO.deleteById(id); }

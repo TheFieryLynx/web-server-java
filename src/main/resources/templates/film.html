@@ -8,6 +8,11 @@
 <body>
 <a href="/">Root page</a><br><br><br>
 
+<form method="get" action="/orderAdd">
+    <input type="hidden" name="film_id" th:value="${film.getFilm_id()}"/>
+    <button type="submit">Add an order</button>
+</form>
+
 <p th:text="'Film id: ' + ${film.getFilm_id()}"></p>
 <p th:text="'Film name: ' + ${film.getFilm_name()}"></p>
 <p th:text="'Producer: ' + ${film.getProducer()}"></p>

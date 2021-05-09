@@ -1,5 +1,3 @@
-SET ROLE web_server_user;
-
 DROP TABLE IF EXISTS Films, Clients, Orders;
 
 CREATE TABLE Films (

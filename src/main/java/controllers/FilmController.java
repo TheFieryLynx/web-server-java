@@ -72,12 +72,19 @@ public class FilmController {
         if (film_id != null) {
             film = filmService.findFilmById(film_id);
             if (film != null) {
-                //todo change available number
                 film.setFilm_name(film_name);
                 film.setProducer(producer);
                 film.setRelease_year(release_year);
-                film.setCassette_total_number(cassette_total_number);
-                film.setDisc_total_number(disc_total_number);
+                if(!film.updateCassetteNumber(cassette_total_number)){
+                    model.addAttribute("error_msg",
+                            "the number of cassettes distributed is greater than newTotalCassetteNumber");
+                    return "errorShow";
+                }
+                if(!film.updateDiscNumber(disc_total_number)){
+                    model.addAttribute("error_msg",
+                            "the number of discs distributed is greater than newTotalCassetteNumber");
+                    return "errorShow";
+                }
                 film.setCassette_price(cassette_price);
                 film.setDisk_price(disk_price);
                 changeIsSuccessful = filmService.updateFilm(film);

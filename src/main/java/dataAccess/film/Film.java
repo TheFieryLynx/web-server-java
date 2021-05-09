@@ -108,6 +108,16 @@ public class Film implements EntityWithId {
         this.cassette_available_number = cassette_available_number;
     }
 
+    public boolean updateCassetteNumber(int newTotalCassetteNumber){
+        int delta = newTotalCassetteNumber - this.cassette_total_number;
+        if (delta == 0) { return true; }  // nothing is changed
+        //  the number of cassettes distributed is greater than newTotalCassetteNumber
+        if (-delta > this.cassette_available_number){ return false; }
+        this.cassette_total_number += delta;
+        this.cassette_available_number += delta;
+        return true;
+    }
+
     @Column(name = "disc_available_number")
     public Integer getDisc_available_number() {
         return disc_available_number;
@@ -115,6 +125,16 @@ public class Film implements EntityWithId {
 
     public void setDisc_available_number(int disc_available_number) {
         this.disc_available_number = disc_available_number;
+    }
+
+    public boolean updateDiscNumber(int newTotalDiscNumber){
+        int delta = newTotalDiscNumber - this.disc_total_number;
+        if (delta == 0) { return true; }  // nothing is changed
+        //  the number of discs distributed is greater than newTotalDiscNumber
+        if (-delta > this.disc_available_number){ return false; }
+        this.disc_total_number += delta;
+        this.disc_available_number += delta;
+        return true;
     }
 
     @Column(name = "cassette_price")
@@ -154,7 +174,7 @@ public class Film implements EntityWithId {
                 this.producer.equals(other.producer) &&
                 (this.cassette_total_number.equals(other.cassette_total_number)) &&
                 (this.disc_total_number.equals(other.disc_total_number)) &&
-//                 due to problems with data consistency (see README)
+//                ignore this fields due to problems with data consistency (see README)
 //                (this.cassette_available_number == other.cassette_available_number) &&
 //                (this.disc_available_number == other.disc_available_number) &&
                 (this.cassette_price.equals(other.cassette_price)) &&

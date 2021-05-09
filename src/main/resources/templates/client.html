@@ -8,6 +8,11 @@
 <body>
 <a href="/">Root page</a><br><br><br>
 
+<form method="get" action="/orderAdd">
+    <input type="hidden" name="client_id" th:value="${client.getClient_id()}"/>
+    <button type="submit">Add an order</button>
+</form>
+
 <p th:text="'Client id: ' + ${client.getClient_id()}"></p>
 <p th:text="'Client name: ' + ${client.getClient_name()}"></p>
 <p th:text="'Phone: ' + ${client.getPhone()}"></p>

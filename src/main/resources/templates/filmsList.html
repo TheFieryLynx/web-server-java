@@ -18,18 +18,22 @@
         <th> Title </th>
         <th> Producer </th>
         <th> Release year </th>
+        <th> Cassette total/available </th>
+        <th> Disc total/available </th>
         <th> Cassette price </th>
         <th> Disk price </th>
     </tr>
     </thead>
     <tbody>
     <tr th:if="${films.empty}">
-        <td colspan="6"> No films here </td>
+        <td colspan="8"> No films here </td>
     </tr>
     <tr th:each="film : ${films}">
         <td><a th:href="'/film?film_id=' + ${film.getFilm_id()}"> <span th:text="${film.getFilm_name()}"> </span> </a></td>
         <td><span th:text="${film.getProducer()}"> </span></td>
         <td><span th:text="${film.getRelease_year()}"> </span></td>
+        <td><span th:text="${film.getCassette_total_number()} + '/' + ${film.getCassette_available_number()}"> </span></td>
+        <td><span th:text="${film.getDisc_total_number()} + '/' + ${film.getDisc_available_number()}"> </span></td>
         <td><span th:text="${film.getCassette_price()}"> </span></td>
         <td><span th:text="${film.getDisk_price()}"> </span></td>
     </tr>
